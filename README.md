@@ -5,7 +5,7 @@
 
 </br>
 
-原项目链接：https://github.com/mobxjs/mobx-state-tree
+原文链接：https://github.com/mobxjs/mobx-state-tree
 
 <p>
   <img src="https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/mobx-state-tree-logo-gradient.svg?sanitize=true" align="left" height="145" width="100"
@@ -19,8 +19,9 @@ style="margin-right: 20px"/>
 </p>
 
 </br>
+</br>
 
-> Mobx and MST are amazing pieces of software, for me it is the missing brick when you build React based apps. Thanks for the great work!# Contents
+> Mobx 和 MST 都是非常令人惊奇的软件, for me it is the missing brick when you build React based apps. Thanks for the great work!# Contents
 
 Nicolas Galle [full post](https://medium.com/@nicolasgall/i-started-to-use-react-last-year-and-i-loved-it-1ce8d53fec6a)
 Introduction blog post [The curious case of MobX state tree](https://medium.com/@mweststrate/the-curious-case-of-mobx-state-tree-7b4e22d461f)
