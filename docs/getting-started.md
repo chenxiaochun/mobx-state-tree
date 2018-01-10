@@ -9,19 +9,19 @@ This tutorial assumes that you know the basics of how to use React. If you don't
 MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
 
 ## 如何追随这门教程
-你可以使用 [codesandbox](https://codesandbox.io/) 在浏览器中直接写代码，也可以使用直接你偏爱的某种编辑器（例如：VSCode）都是可以的。
+你可以使用 [codesandbox](https://codesandbox.io/) 在浏览器中直接写代码，也可以使用你偏爱的某种编辑器（例如：VSCode）都是可以的。
 
 ### 在浏览器中写代码
 我们为每一个实例都提供了 codesandbox 链接。你可以按照知识点一步接一步的去学习教程，如果在什么地方卡住了，可以直接参考下一个实例链接哈 :)。
 
 ### 在编辑器中写代码
-配置 React 项目的开发环境是一件让人觉得很繁琐的事情，你可能需要引入各种编译器、打包器等等。幸好有`create-react-app`这样的脚手架使这种事情简单到只需要在终端中中输入几条命令即可。
+配置 React 项目的开发环境是一件让人觉得很繁琐的事情，你可能需要引入各种编译器、打包器等等。幸好有`create-react-app`这样的脚手架使这种事情简单到只需要在终端中输入几条命令即可。
 
 ```
 npm install -g create-react-app
 create-react-app mst-todo
 ```
-You can now install mobx, mobx-react and mobx-state-tree.
+你需要安装一下 mobx、mobx-react 和 mobx-state-tree。
 ```
 npm install mobx mobx-react mobx-state-tree --save
 ```
