@@ -445,11 +445,10 @@ MST 提供了开箱即用的引用。这意味着我们可以在 Todo model 上�
 ### 标识符
 为了使引用能够工作起来，我们首先需要在目标 model 上创建一个引用的类型标识符，还需要告诉 MST 哪一个属性是`user`的标识符。
 
-In order to make our reference work, we first need to set up identifier in the targetted model Type of the reference. We need to tell MST which attribute is the identifier of the user.
+一旦 model 实例被创建并不会使标识符属性产生突变。这也就意味着如果你使用不同的标识符尝试把一个快照应用到那个 model 上，它就会抛出异常。换句话说，提供一个标识符可以帮助 MST 去理解 map 和 array 里的元素。并且在可能的情况下，使它能够在 maps/arrays 里正确的去重新使用 model 实例。
 
-The identifier attribute cannot be mutated once the model instance has been created. That also means that if you try to apply a snapshot with a different identifier on that model, it will throw. On the other hand, providing an identifier helps MST understand elements in maps and arrays, and allows it to correctly reuse model instances in arrays/maps when possible.
 
-To define an identifier, you will need to define a property using the `types.identifier` type composer. For example, we want the identifier to be a string.
+为了定义一个标识符，你需要先使用`types.identifier`定义一个元类型属性。比如，在这里我们期望标识符为字符串类型。
 
 ```javascript
 const User = types.model({
