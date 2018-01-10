@@ -3,7 +3,7 @@
 本教程将通过构建一个能够给用户分配待办事项的 TODO 应用来为你介绍 mobx-state-tree (MST) 的基础知识。
 
 ## 预备知识
-This tutorial assumes that you know the basics of how to use React. If you don't know what React is and how to use it, you may wish to read first [this tutorial](https://facebook.github.io/react/tutorial/tutorial.html).
+开始此教程之前，我假设你已经对 React 有了基础的了解。否则，建议首先去阅读一下这份 [React 教程](https://facebook.github.io/react/tutorial/tutorial.html)。
 
 ### 我需要提前学习 MobX 吗?
 MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
