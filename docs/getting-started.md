@@ -6,16 +6,16 @@
 This tutorial assumes that you know the basics of how to use React. If you don't know what React is and how to use it, you may wish to read first [this tutorial](https://facebook.github.io/react/tutorial/tutorial.html).
 
 ### 我需要提前学习 MobX 吗?
-MST is based heavily on MobX. A basic understanding of the MobX library will help when dealing with complex situations and how to  connect the data with React components. If you don't have MobX experience, don't worry, working with MST does not require any MobX API knowledge.
+MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
 
 ## 如何追随这门教程
-You can write the code for this tutorial in the browser, using the codesandbox playground, or in your preferred code editor (e.g. VSCode).
+你可以使用 [codesandbox](https://codesandbox.io/) 在浏览器中直接写代码，也可以使用直接你偏爱的某种编辑器（例如：VSCode）都是可以的。
 
 ### 在浏览器中写代码
-For each example you'll fine a codesandbox playground link. You can start from the playgrond of each point and manually progress to the next tutorial step by using it! If you're stuck, feel free to have a sneak peak from the next playground link! :)
+我们为每一个实例都提供了 codesandbox 链接。你可以按照知识点一步接一步的去学习教程，如果在什么地方卡住了，可以直接参考下一个实例链接哈 :)。
 
 ### 在编辑器中写代码
-Setting up the whole environment for a React project involve transpilers, bundlers, linters, etc... and setting them up may become very tedious and not fun. Thanks to `create-react-app` setting up all those tools became easy as typing a couple of lines in your terminal.
+配置 React 项目的开发环境是一件让人觉得很繁琐的事情，你可能需要引入各种编译器、打包器等等。幸好有`create-react-app`这样的脚手架使这种事情简单到只需要在终端中中输入几条命令即可。
 
 ```
 npm install -g create-react-app
