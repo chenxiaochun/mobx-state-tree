@@ -440,13 +440,12 @@ const store = RootStore.create({
 
 现在需要改写一下我们的 Todo model，以便让它能够将任务分配给相应的`user`。当然，你可以通过存储用户`id`，然后指定一个经过计算过的`user`来完成此功能。但是，这可能会最终导致你需要写大量的代码。（你可以自己做下练习）。
 
-MST 提供了开箱即用的引用。这意味着我们可以在 Todo model 上定义一个`user`属性，它是`User`对象的一个引用。当获取快照的时候，属性值就是`User`的标识符；当读取的时候，它会指定一个正确的`User model`实例；当设置它的值时，你可以提供`User model`实例或者`User`标识符都是可以的。
+MST 提供了开箱即用的功能：引用。这意味着我们可以在 Todo model 上定义一个`user`属性，它是`User`对象的一个引用。当获取快照的时候，属性值就是`User`的标识符；当读取的时候，它会指定一个正确的`User model`实例；当设置它的值时，你可以提供`User model`实例或者`User`标识符都是可以的。
 
 ### 标识符
 为了使引用能够工作起来，我们首先需要在目标 model 上创建一个引用的类型标识符，还需要告诉 MST 哪一个属性是`user`的标识符。
 
 一旦 model 实例被创建并不会使标识符属性产生突变。这也就意味着如果你使用不同的标识符尝试把一个快照应用到那个 model 上，它就会抛出异常。换句话说，提供一个标识符可以帮助 MST 去理解 map 和 array 里的元素。并且在可能的情况下，使它能够在 maps/arrays 里正确的去重新使用 model 实例。
-
 
 为了定义一个标识符，你需要先使用`types.identifier`定义一个元类型属性。比如，在这里我们期望标识符为字符串类型。
 
@@ -457,7 +456,7 @@ const User = types.model({
 })
 ```
 
-As I said before, identifiers are required upon creation of the element and cannot be mutated, so if you end up receiving an error like this, that's because you also need to provide ids for the users in the snapshot for the .create of the RootStore.
+就像我以前说过的，标识符在元素的创建上是必需的，并且不会被突变。因此如果你收到了这样的错误提示，那是因为你还需要在使用 RootStore 创建的快照中也添加上相应的 id。
 
 ```
 Error: [mobx-state-tree] Error while converting `{"users":{"1":{"name":"mweststrate"},"2":{"name":"mattiamanzati"},"3":{"name":"johndoe"}},"todos":{"1":{"name":"Eat a cake","done":true}}}` to `AnonymousModel`:
@@ -465,7 +464,7 @@ at path "/users/1/id" value `undefined` is not assignable to type: `identifier(s
 at path "/users/2/id" value `undefined` is not assignable to type: `identifier(string)`, expected an instance of `identifier(string)` or a snapshot like `identifier(string)` instead.
 at path "/users/3/id" value `undefined` is not assignable to type: `identifier(string)`, expected an instance of `identifier(string)` or a snapshot like `identifier(string)` instead.
 ```
-we can easily fix that by providing a correct snapshot.
+我们可以通过提供一个正确的快照来很容易的修复这个问题。
 ```javascript
 const store = RootStore.create({
     "users": {
