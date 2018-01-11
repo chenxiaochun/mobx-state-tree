@@ -307,9 +307,9 @@ const App = observer(props => <div>
 [View sample in playground](https://codesandbox.io/s/r54o5pp8z4)
 
 ## 提高渲染性能
-如果你已经安装了 React 开发工具，并且勾选上“Highlight Updates”选项，你会发现无论是切换 todo 的状态还是修改它的名称都会导致整个应用被重新渲染。这个太丢人了，因为如果你的列表中存在大量的 todo 的话，就会产生性能问题。
+如果你已经安装了 React 开发工具，并且勾选上“Highlight Updates”选项，你会发现无论是切换 todo 的状态还是修改它的名称都会导致整个应用被重新渲染。这个太丢人了，因为如果你的列表中存在大量 todo 的话，就会产生性能问题。
 
-幸好 MobX 提供了颗粒级更新的能力，可以很容易的修复此类问题。你只需要把单个的 todo 渲染分离到一个单独的组件里，这时再改变 todo 的数据就只会重新渲染此单独组件了。
+幸好 MobX 提供了颗粒级的更新能力，可以很容易的修复此类问题。你只需要把单个的 todo 渲染分离到一个单独的组件里，这时再改变 todo 的数据就只会重新渲染此单独组件了。
 
 ```javascript
 const TodoView = observer(props =>
@@ -327,9 +327,9 @@ const AppView = observer(props =>
 ```
 [View sample in playground](https://codesandbox.io/s/m3rw1wll79)
 
-Basically each `observer` declaration will enable the React component to only re-render if any of it's observed data changes. Since our App component was observing everything, it was basically re-rendering whenever you changed something.
+经过改造之后，基本上每一个`observer`声明会促使只有被观测的数据改变之后，相对应的 React 组件才会被重新渲染。可是 App 组件依然在观测着所有事情，所以无论你修改什么，它还是会被重新渲染。
 
-Now that we have split the rendering logic out into a separate observer, the Todo will re-render only if that todo changes, and App will re-render only if a new todo is added/removed since it's observing only the length of the todo map.
+现在我们把渲染逻辑分离到一个单独的`observer`中，这时 todo 就只会在它本身数据有变化时才会重新渲染。而 App 组件也只是在添加/删除 todo 时才会被重新渲染，因为它现在只是在观测 todo 的长度而已。
 
 ## 计算属性
 
