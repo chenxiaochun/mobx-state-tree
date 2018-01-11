@@ -25,7 +25,7 @@ create-react-app mst-todo
 ```
 npm install mobx mobx-react mobx-state-tree --save
 ```
-Then you can run `npm run start` and a basic React page will show up. You can now start editing all you need!
+然后执行`npm run start`之后，一个基础的 React 页面就会展示在你面前。
 
 ## 概述
 mobx-state-tree is a state container that combines the simplicity and ease of mutable data with the traceability of immutable data and the reactiveness and performance of observable data.
@@ -307,9 +307,9 @@ const App = observer(props => <div>
 [View sample in playground](https://codesandbox.io/s/r54o5pp8z4)
 
 ## 提高渲染性能
-If you have the React DevTools installed, using the "Highlight Updates" check you will see that the entire application will re-render whenever a todo is toggled or name is changed. That's a shame, as this can cause performance issues if there are a lots of todos in our list!
+如果你已经安装了 React 开发工具，并且勾选上“Highlight Updates”选项，你会发现无论是切换 todo 的状态还是修改它的名称都会导致整个应用被重新渲染。这个太丢人了，因为如果你的列表中存在大量的 todo 的话，就会产生性能问题。
 
-Thanks to the ability of MobX to emit granular updates, fixing that becomes pretty easy! You just need to split the rendering of a Todo into another component to only re-render that component whenever the todo data changes.
+幸好 MobX 提供了颗粒级更新的能力，可以很容易的修复此类问题。你只需要把单个的 todo 渲染分离到一个单独的组件里，这时再改变 todo 的数据就只会重新渲染此单独组件了。
 
 ```javascript
 const TodoView = observer(props =>
