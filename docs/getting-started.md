@@ -332,8 +332,7 @@ const AppView = observer(props =>
 现在我们把渲染逻辑分离到一个单独的`observer`中，这时 todo 就只会在它本身数据有变化时才会重新渲染。而 App 组件也只是在添加/删除 todo 时才会被重新渲染，因为它现在只是在观测 todo 的长度而已。
 
 ## 计算属性
-
-We now want to display the count of TODOs to be done in our application, to help users know how many TODOs are left. That means that we need to count the number of TODOs with "done" set to false. To do this, we just need to modify the RootStore declaration, and add a getter property over our model by calling `.views` that will count how many TODOs are left.
+我们想在应用里展示所有 todo 的数目，以便让用户知道还有哪些 todo 还未完成。这就意味着我们要计算出那些“done”属性被设置为 false 的 todo 数量。因此，我们要修改一下 RootStore 声明，并且通过调用`.views`方法去添加 get 属性，以便能够计算出哪些 todo 还未完成。
 
 ```javascript
 const RootStore = types.model({
