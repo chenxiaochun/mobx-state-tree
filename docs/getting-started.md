@@ -47,11 +47,11 @@ Todo
 * done
 
 ## 创建第一个 model
-Central to MST (mobx-state-tree) is the concept of a living tree. The tree consists of mutable, but strictly protected objects enriched with runtime type information. In other words; each tree has a shape (type information) and state (data). From this living tree, immutable, structurally shared, snapshots are generated automatically.
+MST 的最主要概念就是一个动态树。这个树结构由可变的，但是受严格的运行时类型信息保护的对象组成。换句话说，每个树都是由模型（类型信息）和状态（数据）组成的。From this living tree, immutable, structurally shared, snapshots are generated automatically.
 
-This means that in order to make our application work, we need to describe how our entities are shaped to MST. Knowing that, MST will be able to automatically generate all those boundaries, and help us avoiding silly mistakes, like putting strings in price fields or booleans where an array is expected.
+这意味着如果想让应用运行起来，我们需要向 MST 描述清楚我们的实体模型。知道了这些信息，MST 就可以自动为我们生成所有的边界，以避免犯一些愚蠢的错误。比如，把字符串赋值给了价格字段或者 booleans where an array is expected.
 
-The simplest way to define a model for an entity in MST, is by providing a sample data that will be used as defaults for it, and pass it to the types.model function.
+使用 MST 定义 model 实体的一个最简单方式就是提供一个将来会被用作默认值的数据给 types.model 方法。
 
 ```javascript
 import { types } from "mobx-state-tree"
@@ -67,10 +67,11 @@ const User = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/98x2n959ky)
 
-The code above will create two types, a User and a Todo type, but as we said before, a tree model in MST consists of type information (and we just saw how to define them) and state (the instance data). So how do we create an instance of the Todo and User type?
+上面的代码会创建两种类型数据，分别是 User 和 Todo 类型。但我们前面说过，一个 model tree 是由类型信息和状态组成的，那我们怎样定义一个 Todo 和 User 类型的实例呢？
 
 ## 创建 model 实例 (tree nodes)
-That could be easily done by calling .create() on the User and Todo type we just defined.
+可以很容易的在 User 和 Todo 类型上调用`.create()`方法来完成这件事情。
+
 ```javascript
 import { types } from "mobx-state-tree"
 
@@ -92,7 +93,7 @@ console.log("Eat TODO:", eat.toJSON())
 ```
 [View sample in playground](https://codesandbox.io/s/6jo1o9n9qk)
 
-As you will see, using models ensures that all the fields defined will be always present and defaulted to the predefined value. If you want to change that value when creating the model instance, you can simply pass an object with the values to use into the create function.
+正如你所见，使用 models 可以确保所有被定义字段都是已存在的默认值。但如果你想在创建 model 实例时改变它的值，可以简单的给 create 方法传递一个对象即可。
 
 ```javascript
 const eat = Todo.create({ name: "eat" })
