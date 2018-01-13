@@ -93,7 +93,7 @@ console.log("Eat TODO:", eat.toJSON())
 ```
 [View sample in playground](https://codesandbox.io/s/6jo1o9n9qk)
 
-正如你所见，使用 models 可以确保所有被定义字段都是已存在的默认值。但如果你想在创建 model 实例时改变它的值，可以简单的给 create 方法传递一个对象即可。
+正如你所见，使用 models 可以确保所有被定义字段都是预先定义过的默认值。但如果你想在创建 model 实例时改变它的值，可以简单的给 create 方法传递一个对象即可。
 
 ```javascript
 const eat = Todo.create({ name: "eat" })
@@ -103,7 +103,8 @@ console.log("Eat TODO:", eat.toJSON()) // => will print {name: "eat", done: fals
 [View sample in playground](https://codesandbox.io/s/ymqpj71oj9)
 
 ## 遇见 types
-When playing with this feature and passing in values to the create method, you may encounter an error like this:
+当你运行下面代码时，发现它会抛出错误异常：
+
 ```javascript
 const eat = Todo.create({ name: "eat", done: 1 })
 ```
@@ -111,7 +112,8 @@ const eat = Todo.create({ name: "eat", done: 1 })
 Error: [mobx-state-tree] Error while converting `{"name":"eat","done":1}` to `AnonymousModel`:
 at path "/done" value `1` is not assignable to type: `boolean`.
 ```
-What does this mean? As I said before, MST nodes are type-enriched. This means that providing a value (number) of the wrong type (expected boolean) will make MST throw an error. This is very helpful when building applications, as it will keep your state consistent and avoid entering in illegal states due to data of the wrong type. To be honest with you, I lied when I told you how to define models. The syntax you used was only a shortcut for the following syntax:
+
+这是为什么呢？我前面说过，MST 的节点都是强类型的。所以你不能给一个布尔类型提供一个数值类型的值。这种特性对构建应用非常有好处，可以保证你的状态始终如一，不会有非法的状态类型插入进来。下面是定义 model 的一种快捷方式。
 
 ```javascript
 const Todo = types.model({
@@ -125,9 +127,7 @@ const User = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/j27j41828v)
 
-The types namespace provided in the MST package provides a lot of useful types and utility types like array, map, maybe, refinements and unions. If you are interested in them, feel free to check out the API documentation for the whole list and their parameters.
-
-We can now use this knowledge to combine types and define the root type of our store that will hold users and todos. It will have a map of users and todos stored under the according key.
+MST 中的命名空间类型还内置了很多实用的类型，例如：array、map、maybe、refinements 和 unions。如果你对他们感兴趣，可以去查阅 api 文档。我们现在将 types 和定义的一个 RootStore 结合起来用于约束 users 和 todos。
 
 Notice that the types.optional second argument is required as long you don't pass a value in the create method of the type. If you want, for example, to make the name or todos property required when calling create, just remove the types.optional function call and just pass the types.* included inside.
 
