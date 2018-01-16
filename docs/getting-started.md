@@ -113,7 +113,7 @@ Error: [mobx-state-tree] Error while converting `{"name":"eat","done":1}` to `An
 at path "/done" value `1` is not assignable to type: `boolean`.
 ```
 
-这是 MST 的节点都是强类型的，你不能给一个布尔类型提供一个数值类型的值。这种特性对构建应用非常有好处，可以保证你的状态始终如一，不会有非法的状态类型插入进来。下面是定义 model 的一种快捷方式。
+这是因为 MST 的节点都是强类型的，你不能给一个布尔类型提供一个数值类型的值。这种特性对构建应用非常有好处，可以保证你的状态始终如一，不会有非法的状态类型插入进来。下面是定义 model 的一种快捷方式。
 
 ```javascript
 const Todo = types.model({
