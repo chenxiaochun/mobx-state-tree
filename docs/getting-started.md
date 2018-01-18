@@ -47,7 +47,7 @@ Todo
 * done
 
 ## 创建第一个 model
-MST 的最主要概念就是一个动态树。这个树结构由可变的，但是受严格的运行时类型信息保护的对象组成。换句话说，每个树都是由模型（类型信息）和状态（数据）组成的。From this living tree, immutable, structurally shared, snapshots are generated automatically.
+MST 的最主要概念就是一个动态树。这个树结构由可变的，但是受严格的运行时类型信息保护的对象组成。换句话说，每个树都是由模型（类型信息）和状态（数据）组成的。从这个动态树中可以自动生成不可变的、结构上共享的快照。
 
 这意味着如果想让应用运行起来，我们需要向 MST 描述清楚我们的实体模型。知道了这些信息，MST 就可以自动为我们生成所有的边界，以避免犯一些愚蠢的错误。比如，把字符串赋值给了价格字段或者 booleans where an array is expected.
 
