@@ -155,7 +155,7 @@ const store = RootStore.create({
 [View sample in playground](https://codesandbox.io/s/5wyx1xvvj4)
 
 ## 修改数据
-MST tree nodes (model instances) can be modified using actions. Actions are colocated with your types and can be easily defined by declaring `.actions` over your model type and passing it a functions that accept the model instance and returns an object with the functions that modify that tree node.
+MST 的树节点（也就是 model 实例）可以使用 action 来修改它。可以很容易的通过在`types`上调用`action`方法，给它传递一个回调函数，回调函数的参数为 model 实例，然后在回调函数内部将修改之后的 model 实例返回就可以了。 
 
 For example, the following actions will be defined on the Todo type, and will allow you to toggle the done and set the name of the provided Todo instance.
 ```javascript
@@ -190,6 +190,8 @@ const RootStore = types.model({
 })
 ```
 [View sample in playground](https://codesandbox.io/s/928l6pw7pr)
+
+请注意`self`的使用。`self`的对象结构是由你创建的 model 实例构成的。
 
 Please notice the use of "self". Self is the object being constructed when an instance of your model is created. Thanks to the self object instance actions are "this-free", allowing you to be sure that they are correclty bound.
 
