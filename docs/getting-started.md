@@ -8,7 +8,7 @@
 ### 我需要提前学习 MobX 吗?
 MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
 
-## 如何追随这门教程
+## 如何跟随这门教程
 你可以使用 [codesandbox](https://codesandbox.io/) 在浏览器中直接写代码，也可以使用你偏爱的某种编辑器（例如：VSCode）都是可以的。
 
 ### 在浏览器中写代码
@@ -129,7 +129,17 @@ const User = types.model({
 
 MST 中的命名空间类型还内置了很多实用的类型，例如：array、map、maybe、refinements 和 unions。如果你对他们感兴趣，可以去查阅 api 文档。我们现在将 types 和定义的一个 RootStore 结合起来用于约束 users 和 todos。
 
-注意：如果你没有给`type`的`create`方法传递值，那么`types.optional`的第二个参数值就不能省略。If you want, for example, to make the name or todos property required when calling create, just remove the types.optional function call and just pass the types.* included inside.
+注意：如果你没有给`type`的`create`方法传递值，那么`types.optional`的第二个参数值就不能省略。
+
+```js
+const User = types.model({
+    name: types.optional(types.string, "")
+})
+```
+
+比如在上面这段代码中，我们给`name`属性定义的是`string`类型值，假如你省略`optional`函数的第二个参数之后。`name`的默认值就变成了 undefined ，并不是`string`类型，代码也就自然会抛出异常了。
+
+If you want, for example, to make the name or todos property required when calling create, just remove the types.optional function call and just pass the types.* included inside.
 
 ```javascript
 import { types } from "mobx-state-tree"
@@ -157,7 +167,8 @@ const store = RootStore.create({
 ## 修改数据
 MST 的树节点（也就是 model 实例）可以使用 action 来修改它。可以很容易的通过在`types`上调用`action`方法，给它传递一个回调函数，回调函数的参数为 model 实例，然后在回调函数内部将修改之后的 model 实例返回就可以了。 
 
-For example, the following actions will be defined on the Todo type, and will allow you to toggle the done and set the name of the provided Todo instance.
+如下示例中，在 Todo 类型上定义了`action`方法，你就可以在它里面通过提供的 Todo 实例来切换`done`的状态和设置`name`属性值。
+
 ```javascript
 const Todo = types.model({
     name: types.optional(types.string, ""),
@@ -191,11 +202,9 @@ const RootStore = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/928l6pw7pr)
 
-请注意`self`的使用。`self`的对象结构是由你创建的 model 实例构成的。
+这里你需要知道，`self`的对象结构就是由你创建的 model 实例构成的。并且`action`方法已经被正确地绑定了`this`作用域，`self`指向的就是上面定义的 model 实例。
 
-Please notice the use of "self". Self is the object being constructed when an instance of your model is created. Thanks to the self object instance actions are "this-free", allowing you to be sure that they are correclty bound.
-
-Calling those actions is as simple as what you would do with plain JavaScript classes, you simply call them on a model instance!
+通过调用这些`action`方法就可以如此简单的实现 js 类，然后通过一个 model 实例来调用它们的方法了。
 
 ```javascript
 store.addTodo(1, "Eat a cake")
