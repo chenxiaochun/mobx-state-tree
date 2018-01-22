@@ -367,9 +367,9 @@ const RootStore = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/x3qlr3xpjo)
 
-Those properties are called "computed" because they keep track of the changes of the observed fields and recompute automatically if anything used by that field changes. This allows for performance savings; for example changing the name of a TODO won't affect the number of pending and completed count, as such it wont trigger a recalculation of those counters.
+这些计算属性会一直追踪着被观察字段的变化，一旦有使用的字段值发生了改变，就会自动重新计算。这里其实有值得优化的性能问题，比如，改变 todo 的 name 其实不应该影响 todo 的完成与未完成数量。
 
-We can easily see that by creating an additional component in our application that observes the store and renders those counters. Using the React Dev Tools and tracing updates, you'll see that changing the name of a TODO won't re-render that counters, while checking completed or uncompleted will re-render the todo and the counters.
+我们可以通过添加一个额外的组件来单独观察完成与未完成的数量。现在再使用 React 开发者工具的“Highlight Updates”功能，你会发现改变 todo 的 name 就不会触发 todo 的数量也会重新渲染了，而只有当你切换它们的完成状态时，才会触发数量的重新渲染。
 
 ```javascript
 const TodoCounterView = observer(props =>
@@ -388,7 +388,7 @@ const AppView = observer(props =>
 ```
 [View sample in playground](https://codesandbox.io/s/x3qlr3xpjo)
 
-If you're console.log your snapshot, you'll notice that computed properties won't appear in snapshots. Thats fine and intended, since those properties must be computed over the other properties of the tree, they can be reproduced by knowing just their definition. For the same reason, if you provide a computed value in a snapshot you'll end up with an error when you attempt to apply it.
+如果你`console.log`一下快照会发现，计算属性并没有出现在快照中。这其实故意就是这样设计的，因为计算属性必须是基于树的其它属性变化，才会被重新计算。因此，当你在快照中添加一个计算属性时，就会抛出异常。
 
 ## model 视图
 你有可能需要在应用程序的不同位置使用过滤之后的待办事项列表。虽然每次去访问过滤一下待办事项列表也是一个可行的方案，但是，如果你的过滤器逻辑很复杂或者它随着时间在不断的变化，你就会发现这个方案并不是那么可行了。
