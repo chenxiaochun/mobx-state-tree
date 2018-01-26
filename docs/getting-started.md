@@ -301,8 +301,7 @@ export function nextState() {
 ```
 
 ## 和界面关联起来
-MST loves MobX, and is fully compatible with it's autorun, reaction, observe, etc! You can use the mobx-react package to connect a MST store to a React component!
-More details can be found on the mobx-react package documentation, but keep in mind that any view engine could be easily integrated with MST, just listen to onSnapshot and update accordingly!
+MST 完全兼容 MobX 的 autorun、reaction、observe 等功能特性。你可以使用 mobx-react 将 MST 的 store 和 React 组件关联起来，更多详细信息可查阅 mobx-react 的文档。MST 可以很容易的和任何视图引擎整合起来，只要对快照进行监听并进行相应的更新即可。
 
 ```javascript
 const App = observer(props => <div>
@@ -502,7 +501,7 @@ const store = RootStore.create({
 ```
 [View sample in playground](https://codesandbox.io/s/mzvx6o7r0j)
 
-### How to define the reference
+### 如何定义引用
 The reference we are looking for can be easily defined as `types.reference(User)`. Sometimes this can lead to circular references that may use a type before it's declared. To postpone the resolution of the type, you can use `types.late(() => User)` instead of just `User` and that will hoist the type and defer its evaluation. The user assignee for the Todo could also be omitted, so we will use `types.maybe(...)` to allow the user property to be null and be initialized as null.
 
 ```javascript
