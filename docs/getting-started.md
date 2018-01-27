@@ -30,21 +30,12 @@ npm install mobx mobx-react mobx-state-tree --save
 ## 概述
 mobx-state-tree is a state container that combines the simplicity and ease of mutable data with the traceability of immutable data and the reactiveness and performance of observable data.
 
-If this sentence confused you, don't worry. We will dive together and explore what it means step by step.
+如果你对这个说明很困惑，不用担心。我们一起一步一步地来探索它。
 
 ## Getting Started
 When building applications with MST, the first exercise that will help you building your application is thinking which is the minimal set of entities and their relative attributes of our application.
 
-In our example application we will deal with todos, so we need a Todo entity. The Todo entity will have a name and a done attribute to store if that todo is done or not. We will also have a knowledge of Users (name will be enough for now), so we need an User entity, whose TODO will be assigned to.
-
-In the end we will have something like:
-
-User
-* name
-
-Todo
-* name
-* done
+在我们的示例应用中处理的是 todo 代办事项，因此我们需要一个 todo 实体，它包含 name 和 todo 两个属性，并且 todo 属性有两种状态：完成与未完成。我们还需要一个 user 实体，用来分配代办事项。
 
 ## 创建第一个 model
 MST 的最主要概念就是一个动态树。这个树结构由可变的，但是受严格的运行时类型信息保护的对象组成。换句话说，每个树都是由模型（类型信息）和状态（数据）组成的。从这个动态树中可以自动生成不可变的、结构上共享的快照。
@@ -202,7 +193,7 @@ const RootStore = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/928l6pw7pr)
 
-这里你需要知道，`self`的对象结构就是由你创建的 model 实例构成的。并且`action`方法已经被正确地绑定了`this`作用域，`self`指向的就是上面定义的 model 实例。
+这里你需要知道，`self`的对象结构就是由你创建的 model 实例构成的。并且`action`方法已经被正确地绑定了`this`作用域，所以`self`指向的就是上面定义的 model 实例。
 
 通过调用这些`action`方法就可以如此简单的实现 js 类，然后通过一个 model 实例来调用它们的方法了。
 
