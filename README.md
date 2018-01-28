@@ -195,21 +195,19 @@ mobx-state-tree "immutable trees" and "graph model" features talk, ["Next Genera
 
 With MobX state tree, you build, as the name suggests, trees of models.
 
-### Trees, types and state
+### 树，类型和数据
 
-Each **node** in the tree is described by two things: Its **type** (the shape of the thing) and its **data** (the state it is currently in).
-
-The simplest tree possible:
+树中的每一个节点都被两个东西所定义：它的类型和它的数据。一个最简单的树可能是这样的：
 
 ```javascript
 import {types} from "mobx-state-tree"
 
-// declaring the shape of a node with the type `Todo`
+// 声明节点的数据类型
 const Todo = types.model({
     title: types.string
 })
 
-// creating a tree based on the "Todo" type, with initial data:
+// 基于 Todo 节点声明创建一个树，并初始化数据
 const coffeeTodo = Todo.create({
     title: "Get coffee"
 })
@@ -254,13 +252,11 @@ const TodoStore = types
         };
     })
 ```
+创建一个 model 时，传给 model 方法的第一个参数表示它的名字（标有 1 的代码行），用于 debug 代码时使用；第二个对象参数定义了它所有的属性。
 
-When defining a model, it is advised to give the model a name for debugging purposes (see `// 1`).
-A model takes additionally object argument defining the properties.
+属性参数是一个 key-value 的集合，key 表示属性名称，value 表示它的数据类型。下面的类型都是可接受的：
 
-The _properties_ argument is a key-value set where each key indicates the introduction of a property, and the value its type. The following types are acceptable:
-
-1. A type. This can be a simple primitive type like `types.boolean`, see `// 2`, or a complex, possibly pre-defined type (`// 4`)
+1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的预定义类型（标有 4 的代码行）
 2. A primitive. Using a primitive as type is syntactic sugar for introducing a property with a default value. See `// 3`, `endpoint: "http://localhost"` is the same as `endpoint: types.optional(types.string, "http://localhost")`. The primitive type is inferred from the default value. Properties with a default value can be omitted in snapshots.
 3. A [computed property](https://mobx.js.org/refguide/computed-decorator.html), see `// 6`. Computed properties are tracked and memoized by MobX. Computed properties will not be stored in snapshots or emit patch events. It is possible to provide a setter for a computed property as well. A setter should always invoke an action.
 4. A view function (see `// 7`). A view function can, unlike computed properties, take arbitrary arguments. It won't be memoized, but its value can be tracked by MobX nonetheless. View functions are not allowed to change the model, but should rather be used to retrieve information from the model.
@@ -435,7 +431,7 @@ This may be desired if the default protection of `mobx-state-tree` doesn't fit y
 
 任何从你的数据状态中的派生都可以被称之为“view”或者“derivation”（推导）。想了解一些背景信息可查看[Mobx 概念与原则](https://mobx.js.org/intro/concepts.html)
 
-View 有两种使用方式：有参数和无参数。因此，基于 mobx 的[计算属性](https://mobx.js.org/refguide/computed-decorator.html)概念，第二种情况也会被称之为计算值。The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
+View 有两种使用方式：有参数和无参数。根据 mobx 中的[计算属性](https://mobx.js.org/refguide/computed-decorator.html)概念说明，后者也会被称之为计算值。The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
 
 Example:
 
