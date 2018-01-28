@@ -350,11 +350,7 @@ This makes it possible to get a patch stream of a certain subtree, or to apply m
 
 ### Actions
 
-By default, nodes can only be modified by one of their actions, or by actions higher up in the tree.
-Actions can be defined by returning an object from the action initializer function that was passed to `actions`.
-The initializer function is executed for each instance, so that `self` is always bound to the current instance.
-Also, the closure of that function can be used to store so called _volatile_ state for the instance, or to create private functions that can only
-be invoked from the actions, but not from the outside.
+默认情况下，只有当前或者更高层级的 action 才能修改节点数据。需要给 action 传递一个初始化回调函数，它返回的是一个对象。初始化函数会在每个实例上都执行一次，因此，`self`指向的就是当前实例。在 action 的回调函数中通常用来存储某些数据，这个也被称为实例的 volatile 状态，又或者是用来创建一个只能在 action 内部被调用的私有方法。
 
 ```javascript
 const Todo = types.model({
@@ -371,25 +367,24 @@ const Todo = types.model({
     })
 ```
 
-Or, shorter if no local state or private functions are involved:
+或者，如果没有本地数据和私有方法被外部调用的话，也可以简写成：
 
 ```javascript
 const Todo = types.model({
         title: types.string
     })
-    .actions(self => ({ // note the `({`, we are returning an object literal
-        setTitle(newTitle) {
+    .actions(self => ({ // 注意 `({`，我们仅返回了一个对象字面量
+        setTitle(newTitle) {
             self.title = newTitle
         }
     }))
 ```
 
-Actions are replayable and are therefore constrained in several ways:
+Action 是可复制的，因此它也有若干约束需要你知道：
 
-- Trying to modify a node without using an action will throw an exception.
-- It's recommended to make sure action arguments are serializable. Some arguments can be serialized automatically, such as relative paths to other nodes
-- Actions can only modify models that belong to the (sub)tree on which they are invoked
-- You cannot use `this` inside actions, instead, use `self`. This makes it safe to pass actions around without binding them or wrapping them in arrow functions.
+- 不使用 action 修改节点将会抛出异常
+- 建议 action 的参数是可序列化的。例如，其它节点的相对路径就会被自动序列化
+- 不要在 action 内部使用`this`，应该用`self`来代替它。This makes it safe to pass actions around without binding them or wrapping them in arrow functions.
 
 Useful methods:
 
@@ -397,7 +392,7 @@ Useful methods:
 -   [`addMiddleware`](API.md#addmiddleware) listens to any action that is invoked on the model or any of its descendants.
 -   [`applyAction`](API.md#applyaction) invokes an action on the model according to the given action description
 
-#### Asynchronous actions
+#### 异步的 action
 
 Asynchronous actions have first class support in MST and are described in more detail [here](docs/async-actions.md#asynchronous-actions-and-middleware).
 Asynchronous actions are written by using generators and always return a promise. For a real working example see the [bookshop sources](https://github.com/mobxjs/mobx-state-tree/blob/adba1943af263898678fe148a80d3d2b9f8dbe63/examples/bookshop/src/stores/BookStore.js#L25). A quick example to get the gist:
