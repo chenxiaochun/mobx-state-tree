@@ -433,10 +433,9 @@ This may be desired if the default protection of `mobx-state-tree` doesn't fit y
 
 ### Views
 
-Any fact that can be derived from your state is called a "view" or "derivation".
-See the [Mobx concepts & principles](https://mobx.js.org/intro/concepts.html) for some background.
+任何从你的数据状态中的派生都可以被称之为“view”或者“derivation”（推导）。想了解一些背景信息可查看[Mobx 概念与原则](https://mobx.js.org/intro/concepts.html)
 
-Views come in two flavors. Views with arguments and views without arguments. The latter are called computed values, based on the [computed](https://mobx.js.org/refguide/computed-decorator.html) concept in mobx. The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
+View 有两种使用方式：有参数和无参数。因此，基于 mobx 的[计算属性](https://mobx.js.org/refguide/computed-decorator.html)概念，第二种情况也会被称之为计算值。The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
 
 Example:
 
