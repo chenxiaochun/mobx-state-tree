@@ -30,7 +30,7 @@ npm install mobx mobx-react mobx-state-tree --save
 ## 概述
 mobx-state-tree is a state container that combines the simplicity and ease of mutable data with the traceability of immutable data and the reactiveness and performance of observable data.
 
-如果你对这个说明很困惑，不用担心。我们一起一步一步地来探索它。
+如果你对这个说明很困惑，不用担心。让我们一起一步步地来探索它。
 
 ## Getting Started
 When building applications with MST, the first exercise that will help you building your application is thinking which is the minimal set of entities and their relative attributes of our application.
@@ -130,7 +130,7 @@ const User = types.model({
 
 比如在上面这段代码中，我们给`name`属性定义的是`string`类型值，假如你省略`optional`函数的第二个参数之后。`name`的默认值就变成了 undefined ，并不是`string`类型，代码也就自然会抛出异常了。
 
-If you want, for example, to make the name or todos property required when calling create, just remove the types.optional function call and just pass the types.* included inside.
+例如，你想在调用`create`时让 Todo 的 name 属性值成为必填项，可以去掉`optional`方法并且把`types.string`传进去就可以了。
 
 ```javascript
 import { types } from "mobx-state-tree"
