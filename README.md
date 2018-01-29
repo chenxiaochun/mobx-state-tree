@@ -218,10 +218,9 @@ Other built-in types include arrays, maps, primitives etc. See the [types overvi
 The type information will be used for both.
 
 
-### Creating models
+### 创建 model
 
-The most important type in MST is `types.model`, which can be used to describe the shape of an object.
-An example:
+在 MST 中最重要的类型就是`types.model`，用来定义一个对象是如何构成的。例如：
 
 ```javascript
 const TodoStore = types
@@ -301,7 +300,7 @@ It is perfectly fine to chain multiple `views`, `props` calls etc in arbitrary o
 
 It is also possible to define lifecycle hooks in the _actions_ object, these are actions with a predefined name that are run at a specific moment. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel).
 
-### Tree semantics in detail
+### 树状语义详解
 
 MST trees have very specific semantics. These semantics purposefully constrain what you can do with MST. The reward for that is all kinds of generic features out of the box like snapshots, replayability, etc... If these constraints don't suit your app, you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
 
@@ -755,7 +754,7 @@ const Todo =  types.model({})
     }))
 ```
 
-The object that is returned from the `volatile` initializer function can contain any piece of data, and will result in an instance property with the same name. Volatile properties have the following characteristics:
+从`volatile`的初始化函数中可以返回任意数量的数据对象，并且它们具有相同名字的实例属性。Volatile 属性具有以下特性：
 
 1. The can be read from outside the model (if you want hidden volatile state, keep the state in your closure as shown in the previous section)
 2. The volatile properties will be only observable be [observable _references_](https://mobx.js.org/refguide/modifiers.html). Values assigned to them will be unmodified and not automatically converted to deep observable structures.
