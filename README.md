@@ -256,9 +256,9 @@ const TodoStore = types
 属性参数是一个 key-value 的集合，key 表示属性名称，value 表示它的数据类型。下面的类型都是可接受的：
 
 1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的预定义类型（标有 4 的代码行）
-2. A primitive. Using a primitive as type is syntactic sugar for introducing a property with a default value. See `// 3`, `endpoint: "http://localhost"` is the same as `endpoint: types.optional(types.string, "http://localhost")`. The primitive type is inferred from the default value. Properties with a default value can be omitted in snapshots.
+2. 可以直接使用一个原始类型值作为默认值（标有 3 的代码行），`endpoint: "http://localhost"`等同于`endpoint: types.optional(types.string, "http://localhost")`。MST 可以通过默认值推测出其数据类型是什么，拥有默认值的属性在创建快照时可以进行省略。
 3. A [computed property](https://mobx.js.org/refguide/computed-decorator.html), see `// 6`. Computed properties are tracked and memoized by MobX. Computed properties will not be stored in snapshots or emit patch events. It is possible to provide a setter for a computed property as well. A setter should always invoke an action.
-4. A view function (see `// 7`). A view function can, unlike computed properties, take arbitrary arguments. It won't be memoized, but its value can be tracked by MobX nonetheless. View functions are not allowed to change the model, but should rather be used to retrieve information from the model.
+4. A view function (see `// 7`). A view function can, unlike computed properties, take arbitrary arguments. It won't be memoized, but its value can be tracked by MobX nonetheless. View 函数不允许修改 model，通常用它来检索 model 的信息。
 
 _Tip: `(self) => ({ action1() { }, action2() { }})` is ES6 syntax for `function (self) { return { action1: function() { }, action2: function() { } }}`, in other words; it's short way of directly returning an object literal.
 For that reason a comma between each member of a model is mandatory, unlike classes which are syntactically a totally different concept._
@@ -302,20 +302,20 @@ It is also possible to define lifecycle hooks in the _actions_ object, these are
 
 ### 树状语义详解
 
-MST trees have very specific semantics. These semantics purposefully constrain what you can do with MST. The reward for that is all kinds of generic features out of the box like snapshots, replayability, etc... If these constraints don't suit your app, you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
+MST 树拥有非常特别的语义，这些语义就是有目的的约束你。它带来的好处就是提供了各种开箱即用的特性，比如：快照、可复用性等。如果这些约束并不适用于你的应用，you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
 
-1. Each object in a MST tree is considered a _node_. Each primitive (and frozen) value is considered a _leaf_.
-1. MST has only three types of nodes; _model_, _array_, and _map_.
-1. Every _node_ tree in a MST tree is a tree in itself. Any operation that can be invoked on the complete tree can also be applied to a sub tree.
-1. A node can only exist exactly _once_ in a tree. This ensures it has a unique, identifiable position.
-2. It is however possible to refer to another object in the _same_ tree by using _references_
-3. There is no limit to the amount of MST trees that live in an application. However, each node can only live in exactly one tree.
-4. All _leaves_ in the tree must be serializable; it is not possible to store, for example, functions in a MST.
-6. The only free-form type in MST is frozen; with the requirement that frozen values are immutable and serializable so that the MST semantics can still be upheld.
-7. At any point in the tree it is possible to assign a snapshot to the tree instead of a concrete instance of the expected type. In that case an instance of the correct type, based on the snapshot, will be automatically created for you.
-8. Nodes in the MST tree will be reconciled (the exact same instance will be reused) when updating the tree by any means, based on their _identifier_ property. If there is no identifier property, instances won't be reconciled.
-9. If a node in the tree is replaced by another node, the original node will die and become unusable. This makes sure you are not accidentally holding on to stale objects anywhere in your application.
-10. If you want to create a new node based on an existing node in a tree, you can either `detach` that node, or `clone` it.
+1. 在 MST 中每个对象被认为是一个 “node”，每一个原始类型被认为是一个“leaf”。
+2. MST 仅仅拥有三种节点类型：model、array 和 map。
+3. Every _node_ tree in a MST tree is a tree in itself. Any operation that can be invoked on the complete tree can also be applied to a sub tree.
+4. 一个节点只能在一个树中存在一次，这样可确保它是唯一可辨识的。
+5. 可以在相同的树中使用 reference 去引用另一个对象。
+6. There is no limit to the amount of MST trees that live in an application. However, each node can only live in exactly one tree.
+7. All _leaves_ in the tree must be serializable; it is not possible to store, for example, functions in a MST.
+8. The only free-form type in MST is frozen; with the requirement that frozen values are immutable and serializable so that the MST semantics can still be upheld.
+9. At any point in the tree it is possible to assign a snapshot to the tree instead of a concrete instance of the expected type. In that case an instance of the correct type, based on the snapshot, will be automatically created for you.
+10. Nodes in the MST tree will be reconciled (the exact same instance will be reused) when updating the tree by any means, based on their _identifier_ property. If there is no identifier property, instances won't be reconciled.
+11. If a node in the tree is replaced by another node, the original node will die and become unusable. This makes sure you are not accidentally holding on to stale objects anywhere in your application.
+12. If you want to create a new node based on an existing node in a tree, you can either `detach` that node, or `clone` it.
 
 ### Composing trees
 
@@ -362,7 +362,7 @@ const Todo = types.model({
     })
 ```
 
-或者，如果没有本地数据和私有方法被外部调用的话，也可以简写成：
+如果没有本地数据和私有方法被外部调用的话，也可以简写成：
 
 ```javascript
 const Todo = types.model({
@@ -416,13 +416,13 @@ someModel.actions(self => {
 })
 ```
 
-#### Action listeners versus middleware
+#### Action 监听器和中间件
 
-The difference between action listeners and middleware is: Middleware can intercept the action that is about to be invoked, modify arguments, return types etc. Action listeners cannot intercept, and are only notified. Action listeners receive the action arguments in a serializable format, while middleware receives the raw arguments. (`onAction` is actually just a built-in middleware)
+Action 监听器与中间件的区别是：中间件可以主动拦截那些引用了它的 action，modify arguments, return types etc. Action 监听器不能主动拦截，它只能被动的接受通知。Action listeners receive the action arguments in a serializable format, while middleware receives the raw arguments. (`onAction` is actually just a built-in middleware)
 
 For more details on creating middleware, see the [docs](docs/middleware.md)
 
-#### Disabling protected mode
+#### 禁用保护模式
 
 This may be desired if the default protection of `mobx-state-tree` doesn't fit your use case. For example, if you are not interested in replayable actions, or hate the effort of writing actions to modify any field; `unprotect(tree)` will disable the protected mode of a tree, allowing anyone to directly modify the tree.
 
@@ -463,7 +463,7 @@ autorun(() => {
 
 If you want to share volatile state between views and actions, use `.extend` instead of `.views` + `.actions`, see the [volatile state](#volatile-state) section.
 
-### Snapshots
+### 快照
 
 Snapshots are the immutable serialization, in plain objects, of a tree at a specific point in time.
 Snapshots can be inspected through `getSnapshot(node)`.
