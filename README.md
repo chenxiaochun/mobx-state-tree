@@ -501,8 +501,8 @@ Patches have the following signature:
         value?: any
     }
 
--   Patches are constructed according to JSON-Patch, RFC 6902
--   Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
+-   Patches 是根据 JSON-Patch, RFC 6902 构造的
+-   Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
 -   Patch listeners can be used to achieve deep observing
 -   The `path` attribute of a patch contains the path of the event, relative to the place where the event listener is attached
 -   A single mutation can result in multiple patches, for example when splicing an array
@@ -514,9 +514,10 @@ Useful methods:
 -   `applyPatch(model, patch)` applies a patch (or array of patches) to the provided model
 -   `revertPatch(model, patch)` reverse applies a patch (or array of patches) to the provided model. This replays the inverse of a set of patches to a model, which can be used to bring it back to its original state
 
-### References and identifiers
+### 引用和标识符
 
-References and identifiers are a first-class concept in MST.
+在 MST 中，引用和标识符是一个一流的概念。
+
 This makes it possible to declare references, and keep the data normalized in the background, while you interact with it in a denormalized manner.
 
 Example:
@@ -540,15 +541,14 @@ const storeInstance = TodoStore.create({
     selectedTodo: "47"
 })
 
-// because `selectedTodo` is declared to be a reference, it returns the actual Todo node with the matching identifier
-console.log(storeInstance.selectedTodo.title)
+// 因为 `selectedTodo` 被定义为一个标识符，所以它实际返回的是一个与标识符相匹配的 Todo 节点，也就是`id=47`那个节点。console.log(storeInstance.selectedTodo.title)
 // prints "Get coffee"
 ```
 
-#### Identifiers
+#### 标识符
 
--   Each model can define zero or one `identifier()` properties
--   The identifier property of an object cannot be modified after initialization
+- 每个 model 可定义零个或者一个`identifier()`属性
+- 一个对象的标识符属性不可以在后面的初始化中被修改
 -   Each identifier / type combination should be unique within the entire tree
 -   Identifiers are used to reconcile items inside arrays and maps - wherever possible - when applying snapshots
 -   The `map.put()` method can be used to simplify adding objects that have identifiers to [maps](API.md#typesmap)
