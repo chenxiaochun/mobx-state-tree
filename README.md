@@ -30,7 +30,7 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 # Contents
 
 * [Installation](#installation)
-* [Getting Started](docs/getting-started.md)
+* [入门指南](docs/getting-started.md)
 * [Talks & blogs](#talks--blogs)
 * [理念与概述](#philosophy--overview)
 * [示例](#examples)
@@ -66,7 +66,7 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 
 Typescript typings are included in the packages. Use `module: "commonjs"` or `moduleResolution: "node"` to make sure they are picked up automatically in any consuming project.
 
-# Getting started
+# 入门指南
 
 See the [Getting started](https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started) tutorial.
 
