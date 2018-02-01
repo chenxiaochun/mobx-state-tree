@@ -228,9 +228,9 @@ Note: The `.toJSON()` you have used before in the tutorial is just a shortcut to
 Because the nature of state is mutable, a snapshot will be emitted whenever the state is mutated! To listen to those new snapshot, you can use `onSnapshot(store, snapshot => console.log(snapshot))` to log them as they are emitted!
 
 ## 从快照到 model
-As we just saw, getting a snapshot from a model instance is pretty easy, but wouldn't it be neat to be able to restore a model from a snapshot? The good news is that you can!
+正如我们所见，从一个 model 实例获取一个快照是相当的简单，但是能不能很灵巧的把一个快照恢复成一个 model 呢？当然是可以的。
 
-That basically means that you can restore your objects with your custom methods by just knowing the type of the tree and its snapshot! You can perform this operation in two ways.
+That basically means that you can restore your objects with your custom methods by just knowing the type of the tree and its snapshot! 你有两种方法可以完成这个操作。
 
 First is by creating a new model instance, and pass in the snapshot as argument to create. That means that you will need to update all your store references, if used in React components, to the new one.
 
