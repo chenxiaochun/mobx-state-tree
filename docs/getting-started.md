@@ -32,7 +32,7 @@ mobx-state-tree is a state container that combines the simplicity and ease of mu
 
 如果你对这个说明很困惑，不用担心。让我们一起一步步地来探索它。
 
-## Getting Started
+## 入门指南
 When building applications with MST, the first exercise that will help you building your application is thinking which is the minimal set of entities and their relative attributes of our application.
 
 在我们的示例应用中处理的是 todo 代办事项，因此我们需要一个 todo 实体，它包含 name 和 todo 两个属性，并且 todo 属性有两种状态：完成与未完成。我们还需要一个 user 实体，用来分配代办事项。
@@ -232,9 +232,9 @@ Because the nature of state is mutable, a snapshot will be emitted whenever the 
 
 That basically means that you can restore your objects with your custom methods by just knowing the type of the tree and its snapshot! 你有两种方法可以完成这个操作。
 
-First is by creating a new model instance, and pass in the snapshot as argument to create. That means that you will need to update all your store references, if used in React components, to the new one.
+第一种方法就是创建一个新的 model 实例，然后把快照作为参数传递给它。That means that you will need to update all your store references, if used in React components, to the new one.
 
-The second option avoids this reference problem by applying the snapshot to an existing model instance. Properties will be updated, but the store reference will remain the same. This will trigger an operation called "reconciliation". We will speak later about this phase.
+第二种方法是通过把快照应用到一个已存在的 model 实例上，来避免出现这种引用问题。属性会被更新，但是存储引用不会发生变化。这将会触发一个被称为“调和”的操作，我们在后面会讨论这个。
 
 ```javascript
 // 1st
