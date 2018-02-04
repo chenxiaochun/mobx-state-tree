@@ -262,9 +262,10 @@ applySnapshot(store, {
 [View sample in playground](https://codesandbox.io/s/xjm99kkopp)
 
 ## 时间旅行
-The ability of getting snapshots and applying them makes implementing time travel really easy in user-land. What you need to do is basically listen for snapshots, store them and reapply them to enable time travel!
+获取和应用快照的能力使得用户能够很容易的实现时间旅行。你只需要基于快照的监听，存储并重新应用他们就可以实现时间旅行。
 
-A sample implementation would look like this:
+下面是一个简单的实现：
+
 ```javascript
 import { applySnapshot, onSnapshot } from "mobx-state-tree"
 
@@ -493,7 +494,7 @@ const store = RootStore.create({
 [View sample in playground](https://codesandbox.io/s/mzvx6o7r0j)
 
 ### 如何定义引用
-The reference we are looking for can be easily defined as `types.reference(User)`. Sometimes this can lead to circular references that may use a type before it's declared. To postpone the resolution of the type, you can use `types.late(() => User)` instead of just `User` and that will hoist the type and defer its evaluation. The user assignee for the Todo could also be omitted, so we will use `types.maybe(...)` to allow the user property to be null and be initialized as null.
+可以很容易地通过`types.reference(User)`来定义引用。但有时候这种方式可能会导致循环引用。To postpone the resolution of the type, you can use `types.late(() => User)` instead of just `User` and that will hoist the type and defer its evaluation. The user assignee for the Todo could also be omitted, so we will use `types.maybe(...)` to allow the user property to be null and be initialized as null.
 
 ```javascript
 const Todo = types.model({
@@ -513,8 +514,8 @@ const Todo = types.model({
 ```
 [View sample in playground](https://codesandbox.io/s/mzvx6o7r0j)
 
-### Setting a reference value
-The reference value can be set by providing either the identifier or a model instance. First of all, we need to define an action that will allow you to change the user of the todo.
+### 设置引用的值
+引用的值可以通过标识符或者 model 实例来提供。首先，我们需要定义一个可以改变 todo 的 user 的`action`。
 
 ```javascript
 const Todo = types.model({
