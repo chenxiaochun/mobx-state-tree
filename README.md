@@ -255,7 +255,7 @@ const TodoStore = types
 1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的预定义类型（标有 4 的代码行）
 2. 可以直接使用一个原始类型值作为默认值（标有 3 的代码行），`endpoint: "http://localhost"`等同于`endpoint: types.optional(types.string, "http://localhost")`。MST 可以通过默认值推测出其数据类型是什么，拥有默认值的属性在创建快照时可以进行省略。
 3. 可以是一个[计算属性](https://mobx.js.org/refguide/computed-decorator.html)（标有 6 的代码行）。MobX 会记忆和追踪计算属性。计算属性将不会被存储在快照里，也不会触发 patch 事件。也可能会给计算属性提供一个 setter 方法，并且 setter 方法只能在 action 里被调用。
-4. 可这是一个 view 函数（标有 7 的代码行）。View 函数跟计算属性不一样，它可以获得任意数量的参数。虽然它不会被记忆，但是它的值可以被 MobX 追踪。View 函数不允许修改 model，通常只是用它来检索 model 的信息。
+4. 可以是一个 view 函数（标有 7 的代码行）。View 函数跟计算属性不同，它可以获得任意数量的参数。虽然它不会被记忆，但是它的值可以被 MobX 追踪。View 函数不允许修改 model，通常只是用它来检索 model 的信息。
 
 _提示：`(self) => ({ action1() { }, action2() { }})`是 ES6 的语法，它等价行`function (self) { return { action1: function() { }, action2: function() { } }}`，换句话说，它是一种返回对象字面量的简写方式。
 一个 model 的每个成员之间必须强制添加一个逗号，这个与 class 的语法规则是完全不同的。_
