@@ -32,7 +32,7 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 * [Installation](#installation)
 * [入门指南](docs/getting-started.md)
 * [Talks & blogs](#talks--blogs)
-* [理念与概述](#philosophy--overview)
+* [理念概述](#philosophy--overview)
 * [示例](#examples)
 * [概念](#concepts)
   * [树、类型和状态](#trees-types-and-state)
@@ -68,7 +68,7 @@ Typescript typings are included in the packages. Use `module: "commonjs"` or `mo
 
 # 入门指南
 
-See the [Getting started](https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started) tutorial.
+查看[入门指南](https://github.com/chenxiaochun/mobx-state-tree/blob/master/docs/getting-started.md)教程。
 
 # Talks & blogs
 
@@ -78,7 +78,7 @@ See the [Getting started](https://github.com/mobxjs/mobx-state-tree/blob/master/
 * Talk React Alicante 2017: [Mutable or Immutable? Let's do both!]() ([slides](https://mattiamanzati.github.io/slides-react-alicante-2017/#2))
 * Talk ReactiveConf 2016: [Immer-mutable state management](https://www.youtube.com/watch?v=Ql8KUUUOHNc&list=PLa2ZZ09WYepMCRRGCRPhTYuTCat4TiDlX&index=30)
 
-# Philosophy & Overview
+# 理念概述
 
 `mobx-state-tree` is a state container that combines the _simplicity and ease of mutable data_ with the _traceability of immutable data_ and the _reactiveness and performance of observable data_.
 
@@ -185,13 +185,13 @@ An introduction to the philosophy can be watched [here](https://youtu.be/ta8QKmN
 
 mobx-state-tree "immutable trees" and "graph model" features talk, ["Next Generation State Management"](https://www.youtube.com/watch?v=rwqwwn_46kA) at React Europe 2017. [Slides](http://tree.surge.sh/#1).
 
-# Examples
+# 示例
 
 * [Bookshop](https://github.com/mobxjs/mobx-state-tree/tree/master/packages/mst-example-bookshop) Example webshop application with references, identifiers, routing, testing etc.
 * [Boxes](https://github.com/mobxjs/mobx-state-tree/tree/master/packages/mst-example-boxes) Example app where one can draw, drag, and drop boxes. With time-travelling and multi-client synchronization over websockets.
 * [Redux TodoMVC](https://github.com/mobxjs/mobx-state-tree/tree/master/packages/mst-example-redux-todomvc) Redux TodoMVC application, except that the reducers are replaced with a MST. Tip: open the Redux devtools; they will work!
 
-# Concepts
+# 概念
 
 With MobX state tree, you build, as the name suggests, trees of models.
 
@@ -213,10 +213,7 @@ const coffeeTodo = Todo.create({
 })
 ```
 
-The `types.model` type declaration is used to describe the shape of an object.
-Other built-in types include arrays, maps, primitives etc. See the [types overview](#types-overview).
-The type information will be used for both.
-
+`types.model`通常用来定义对象的结构。其它内置的 type，比如：array、map和基本类型等，可以查看[types 综述](#types-overview)。
 
 ### 创建 model
 
@@ -257,11 +254,11 @@ const TodoStore = types
 
 1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的预定义类型（标有 4 的代码行）
 2. 可以直接使用一个原始类型值作为默认值（标有 3 的代码行），`endpoint: "http://localhost"`等同于`endpoint: types.optional(types.string, "http://localhost")`。MST 可以通过默认值推测出其数据类型是什么，拥有默认值的属性在创建快照时可以进行省略。
-3. A [computed property](https://mobx.js.org/refguide/computed-decorator.html), see `// 6`. Computed properties are tracked and memoized by MobX. Computed properties will not be stored in snapshots or emit patch events. It is possible to provide a setter for a computed property as well. A setter should always invoke an action.
-4. A view function (see `// 7`). A view function can, unlike computed properties, take arbitrary arguments. It won't be memoized, but its value can be tracked by MobX nonetheless. View 函数不允许修改 model，通常用它来检索 model 的信息。
+3. 可以是一个[计算属性](https://mobx.js.org/refguide/computed-decorator.html)（标有 6 的代码行）。MobX 会记忆和追踪计算属性。计算属性将不会被存储在快照里，也不会触发 patch 事件。也可能会给计算属性提供一个 setter 方法，并且 setter 方法只能在 action 里被调用。
+4. 可这是一个 view 函数（标有 7 的代码行）。View 函数跟计算属性不一样，它可以获得任意数量的参数。虽然它不会被记忆，但是它的值可以被 MobX 追踪。View 函数不允许修改 model，通常只是用它来检索 model 的信息。
 
-_Tip: `(self) => ({ action1() { }, action2() { }})` is ES6 syntax for `function (self) { return { action1: function() { }, action2: function() { } }}`, in other words; it's short way of directly returning an object literal.
-For that reason a comma between each member of a model is mandatory, unlike classes which are syntactically a totally different concept._
+_提示: `(self) => ({ action1() { }, action2() { }})`是 ES6 的语法，它等价行`function (self) { return { action1: function() { }, action2: function() { } }}`，换句话说，它是一种返回对象字面量的简写方式。
+一个 model 的每个成员之间必须强制添加一个逗号，这个与 class 的语法规则是完全不同的。_
 
 `types.model` creates a chainable model type, where each chained method produces a new type:
 * `.named(name)` clones the current type, but gives it a new name
