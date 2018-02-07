@@ -263,9 +263,9 @@ _提示：`(self) => ({ action1() { }, action2() { }})`是 ES6 的语法，它�
 `types.model`支持链式写法，每一个链上的方法都会产生一个新的 type：
 
 * `.named(name)`方法会以新的 name 克隆当前 type
-* `.props(props)` produces a new type, based on the current one, and adds / overrides the specified properties
-* `.actions(self => object literal with actions)` produces a new type, based on the current one, and adds / overrides the specified actions
-* `.views(self => object literal with view functions)` produces a new type, based on the current one, and adds / overrides the specified view functions
+* `.props(props)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖掉指定的属性
+* `.actions(self => object literal with actions)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖指定的 action
+* `.views(self => object literal with view functions)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖指定的 view 方法
 * `.preProcessSnapshot(snapshot => snapshot)` can be used to pre-process the raw JSON before instantiating a new model. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel)
 
 Note that `views` and `actions` don't define actions and views directly, but rather they should be given a function.
