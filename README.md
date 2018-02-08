@@ -298,9 +298,9 @@ It is perfectly fine to chain multiple `views`, `props` calls etc in arbitrary o
 
 It is also possible to define lifecycle hooks in the _actions_ object, these are actions with a predefined name that are run at a specific moment. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel).
 
-### 树状语义详解
+### 树结构语义详解
 
-MST 树拥有非常特别的语义，这些语义就是有目的的约束你。它带来的好处就是提供了各种开箱即用的特性，比如：快照、可复用性等。如果这些约束并不适用于你的应用，you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
+MST 树拥有非常特别的语义，这些语义的目的就是为了约束你。它带来的好处就是提供了各种开箱即用的特性，比如：快照、可复用性等。如果这些约束并不适用于你的应用，you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
 
 1. 在 MST 中每个对象被认为是一个 “node”，每一个原始类型被认为是一个“leaf”。
 2. MST 仅仅拥有三种节点类型：model、array 和 map。
