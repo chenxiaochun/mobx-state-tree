@@ -384,7 +384,7 @@ const AppView = observer(props =>
 ## model 视图
 你有可能需要在应用程序的不同位置使用过滤之后的待办事项列表。虽然每次去访问过滤一下待办事项列表也是一个可行的方案，但是，如果你的过滤器逻辑很复杂或者它随着时间在不断的变化，你就会发现这个方案并不是那么可行了。
 
-MST 通过可以声明 model 视图来解决这个问题。A model views is declared as a function over the properties (first argument) of the model declaration. Model views can accept parameters and only read data from our store. If you try to change your store from a model view, MST will throw and prevent you from doing so.
+MST 通过可以声明 model 视图来解决这个问题。A model views is declared as a function over the properties (first argument) of the model declaration. Model view 可以接受若干参数，并且仅能从 store 中读取数据。如果你尝试在 model view 中改变 store 的话，MST 就会抛出异常以阻止你这么做。
 
 ```javascript
 const RootStore = types.model({
