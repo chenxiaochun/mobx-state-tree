@@ -29,7 +29,7 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 ---
 # Contents
 
-* [Installation](#installation)
+* [安装](#installation)
 * [入门指南](docs/getting-started.md)
 * [Talks & blogs](#talks--blogs)
 * [理念概述](#philosophy--overview)
@@ -56,11 +56,11 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 * [Built-in / example middlewares](packages/mst-middlewares/README.md)
 * [Changelog](changelog.md)
 
-# Installation
+# 安装
 
 * NPM: `npm install mobx mobx-state-tree --save`
 * Yarn: `yarn add mobx mobx-state-tree`
-* CDN: https://unpkg.com/mobx-state-tree@1.1.0/dist/mobx-state-tree.umd.js (exposed as `window.mobxStateTree`)
+* CDN: https://unpkg.com/mobx-state-tree@1.1.0/dist/mobx-state-tree.umd.js (暴露为 `window.mobxStateTree`)
 * Playground: [https://mattiamanzati.github.io/mobx-state-tree-playground/](https://mattiamanzati.github.io/mobx-state-tree-playground/) (with React UI, snapshots, patches and actions display)
 * CodeSandbox [TodoList demo](https://codesandbox.io/s/nZ26kGMD) fork for testing and bug reporting
 
