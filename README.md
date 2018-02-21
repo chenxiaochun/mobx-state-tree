@@ -274,7 +274,7 @@ This has two advantages:
 1. All methods will always be bound correctly, and won't suffer from an unbound `this`
 2. The closure can be used to store private state or methods of the instance. See also [actions](#actions) and [volatile state](#volatile-state).
 
-Quick example:
+简单示例：
 
 ```javascript
 const TodoStore = types
@@ -294,7 +294,7 @@ const TodoStore = types
     })
 ```
 
-It is perfectly fine to chain multiple `views`, `props` calls etc in arbitrary order. This can be a great way to structure complex types, mix-in utility functions etc. Each call in the chain creates a new, immutable type which can itself be stored and reused as part of other types, etc.
+可以很完美的以任意顺序链式调用多个`views`和`props`。这是方式可以用来非常好的组织 types，以及混合实用函数。每次的链式调用都会创建一个可以被它自己存储以及作为其它 types 的一部分重复使用的、新的、不可变的 type。
 
 It is also possible to define lifecycle hooks in the _actions_ object, these are actions with a predefined name that are run at a specific moment. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel).
 
