@@ -268,11 +268,11 @@ _提示：`(self) => ({ action1() { }, action2() { }})`是 ES6 的语法，它�
 * `.views(self => object literal with view functions)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖指定的 view 方法
 * `.preProcessSnapshot(snapshot => snapshot)`通常在实例化一个新的 model 之前用来预处理原始 JSON 数据。可查看[生命周期勾子](#lifecycle-hooks-for-typesmodel)
 
-注意：`views`和`actions`不会直接定义 action 和 view，但仍需要给它们传递一个 function。此 function 会在一个新的 model 实例被创建时引入，此实例会被作为唯一参数传递给 function，通常被命名为`self`。
+注意：`views`和`actions`不会直接定义 action 和 view，但仍需要给它们传递一个 function。此 function 会在一个新的 model 实例被创建时引入，此 model 实例会被作为唯一参数传递给 function，通常被命名为`self`。
 
-This has two advantages:
-1. All methods will always be bound correctly, and won't suffer from an unbound `this`
-2. The closure can be used to store private state or methods of the instance. See also [actions](#actions) and [volatile state](#volatile-state).
+这会带来两点好处：
+1. 所有的方法都会正确的绑定 this 上下文。
+2. 闭包通常用来存储实例的私有状态或者方法。可查看[actions](#actions) 和 [volatile state](#volatile-state)。
 
 简单示例：
 
@@ -296,7 +296,7 @@ const TodoStore = types
 
 可以很完美的以任意顺序链式调用多个`views`和`props`。这是方式可以用来非常好的组织 types，以及混合实用函数。每次的链式调用都会创建一个可以被它自己存储以及作为其它 types 的一部分重复使用的、新的、不可变的 type。
 
-It is also possible to define lifecycle hooks in the _actions_ object, these are actions with a predefined name that are run at a specific moment. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel).
+可以在 action 对象内定义生命周期的勾子，这些拥有预定义名称的 action 将会在特定时刻被执行。可查看[生命周期勾子](#lifecycle-hooks-for-typesmodel)。
 
 ### 树结构语义详解
 
