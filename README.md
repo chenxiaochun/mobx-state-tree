@@ -266,10 +266,10 @@ _提示：`(self) => ({ action1() { }, action2() { }})`是 ES6 的语法，它�
 * `.props(props)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖掉指定的属性
 * `.actions(self => object literal with actions)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖指定的 action
 * `.views(self => object literal with view functions)`方法会基于当前产生一个新的 type，并且可以添加或者覆盖指定的 view 方法
-* `.preProcessSnapshot(snapshot => snapshot)` can be used to pre-process the raw JSON before instantiating a new model. See [Lifecycle hooks](#lifecycle-hooks-for-typesmodel)
+* `.preProcessSnapshot(snapshot => snapshot)`通常在实例化一个新的 model 之前用来预处理原始 JSON 数据。可查看[生命周期勾子](#lifecycle-hooks-for-typesmodel)
 
-Note that `views` and `actions` don't define actions and views directly, but rather they should be given a function.
-The function will be invoked when a new model instance is created. The instance will be passed in as the first and only argument. Typically called `self`.
+注意：`views`和`actions`不会直接定义 action 和 view，但仍需要给它们传递一个 function。此 function 会在一个新的 model 实例被创建时引入，此实例会被作为唯一参数传递给 function，通常被命名为`self`。
+
 This has two advantages:
 1. All methods will always be bound correctly, and won't suffer from an unbound `this`
 2. The closure can be used to store private state or methods of the instance. See also [actions](#actions) and [volatile state](#volatile-state).
