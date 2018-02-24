@@ -377,9 +377,9 @@ Action 是可复制的，因此它也有若干约束需要你知道：
 
 - 不使用 action 修改节点将会抛出异常
 - 建议 action 的参数是可序列化的。例如，其它节点的相对路径就会被自动序列化
-- 不要在 action 内部使用`this`，应该用`self`来代替它。This makes it safe to pass actions around without binding them or wrapping them in arrow functions.
+- 不要在 action 内部使用`this`，应该用`self`来代替它。这使得可以很安全的在没有绑定`this`上下文的函数以及箭头函数中去你传递它。
 
-Useful methods:
+一些有用的方法：
 
 -   [`onAction`](API.md#onaction) listens to any action that is invoked on the model or any of its descendants.
 -   [`addMiddleware`](API.md#addmiddleware) listens to any action that is invoked on the model or any of its descendants.
