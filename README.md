@@ -150,7 +150,7 @@ Since MST uses MobX behind the scenes, it integrates seamlessly with [mobx](http
 But even cooler: because it supports snapshots, middleware and replayable actions out of the box, it is even possible to replace a Redux store and reducer with a MobX state tree.
 This makes it even possible to connect the Redux devtools to MST. See the [Redux / MST TodoMVC example](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/redux-todomvc/src/index.js#L6).
 
-![devtools](docs/reduxdevtools.png)
+![devtools](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/reduxdevtools.png)
 
 Finally, MST has built-in support for references, identifiers, dependency injection, change recording and circular type definitions (even across files).
 Even fancier: it analyses liveliness of objects, failing early when you try to access accidentally cached information! (More on that later)
@@ -418,7 +418,7 @@ someModel.actions(self => {
 
 Action 监听器与中间件的区别是：中间件可以主动拦截那些引用了它的 action，modify arguments, return types etc. Action 监听器不能主动拦截，它只能被动的接受通知。Action listeners receive the action arguments in a serializable format, while middleware receives the raw arguments. (`onAction` is actually just a built-in middleware)
 
-For more details on creating middleware, see the [docs](docs/middleware.md)
+对于创建中间件的更多内容可查看[中间件](docs/middleware.md)
 
 #### 禁用保护模式
 
