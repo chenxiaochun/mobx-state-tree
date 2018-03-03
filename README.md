@@ -86,7 +86,7 @@ Simply put, mobx-state-tree tries to combine the best features of both immutabil
 Unlike MobX itself, mobx-state-tree is very opinionated on how data should be structured and updated.
 This makes it possible to solve many common problems out of the box.
 
-MST (mobx-state-tree) 的核心思想就是一个动态树。它由严格受保护的易变对象以及运行时类型信息浓缩而成。换句话说，每个树都是由一个结构（类型信息）和状态（数据）组成。
+MST (mobx-state-tree) 的核心思想就是一个动态树。它由严格受保护的易变对象以及运行时类型信息浓缩而成。换句话说，每个树都是由一个结构（类型信息）和一个状态（数据）组成。
 
 通过这个树，不变的结构被共享，自动生成快照。
 
@@ -121,8 +121,7 @@ store.todos[0].toggle()
 // prints: `{ todos: [{ title: "Get coffee", done: true }]}`
 ```
 
-By using the type information available, snapshots can be converted to living trees, and vice versa, with zero effort.
-Because of this, [time travelling](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/time.js) is supported out of the box, and tools like HMR are trivial to support [example](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/boxes/src/stores/domain-state.js#L94).
+通过使用这些可用的类型信息，快照可以被转换为一个动态树，反之亦然，也是零操作即可转换回去。因此，MST 默认支持[时间旅行](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/time.js)和类似于热替换的功能，可参考[示例](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/boxes/src/stores/domain-state.js#L94)
 
 The type information is designed in such a way that it is used both at design- and run-time to verify type correctness (Design time type checking works in TypeScript only at the moment; Flow PR's are welcome!)
 
