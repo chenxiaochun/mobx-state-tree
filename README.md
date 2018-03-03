@@ -86,8 +86,9 @@ Simply put, mobx-state-tree tries to combine the best features of both immutabil
 Unlike MobX itself, mobx-state-tree is very opinionated on how data should be structured and updated.
 This makes it possible to solve many common problems out of the box.
 
-Central in MST (mobx-state-tree) is the concept of a *living tree*. The tree consists of mutable, but strictly protected objects enriched with _runtime type information_. In other words; each tree has a _shape_ (type information) and _state_ (data).
-From this living tree, immutable, structurally shared, snapshots are generated automatically.
+MST (mobx-state-tree) 的核心思想就是一个动态树。它由严格受保护的易变对象以及运行时类型信息浓缩而成。换句话说，每个树都是由一个结构（类型信息）和状态（数据）组成。
+
+通过这个树，不变的结构被共享，自动生成快照。
 
 ```javascript
 import { types, onSnapshot } from "mobx-state-tree"
@@ -105,17 +106,17 @@ const Store = types.model("Store", {
     todos: types.array(Todo)
 })
 
-// create an instance from a snapshot
+// 通过快照创建一个实例
 const store = Store.create({ todos: [{
     title: "Get coffee"
 }]})
 
-// listen to new snapshots
+// 监听新快照
 onSnapshot(store, (snapshot) => {
     console.dir(snapshot)
 })
 
-// invoke action that modifies the tree
+// 调用 action 去修改树
 store.todos[0].toggle()
 // prints: `{ todos: [{ title: "Get coffee", done: true }]}`
 ```
