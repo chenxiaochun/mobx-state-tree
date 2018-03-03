@@ -123,17 +123,18 @@ store.todos[0].toggle()
 
 通过使用这些可用的类型信息，快照可以被转换为一个动态树，反之亦然，也是零操作即可转换回去。因此，MST 默认支持[时间旅行](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/time.js)和类似于热替换的功能，可参考[示例](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/boxes/src/stores/domain-state.js#L94)
 
-The type information is designed in such a way that it is used both at design- and run-time to verify type correctness (Design time type checking works in TypeScript only at the moment; Flow PR's are welcome!)
+之所以用这样的方式去设计类型信息，就是为了在设计时以及运行时都可以检查类型的正确性（在 TypeScript 中类型检查都是片刻就可以完成的）。
 
 ```
 [mobx-state-tree] Value '{\"todos\":[{\"turtle\":\"Get tea\"}]}' is not assignable to type: Store, expected an instance of Store or a snapshot like '{ todos: { title: string; done: boolean }[] }' instead.
 ```
 
-_Runtime type error_
+运行时类型错误：
 
 ![typescript error](https://github.com/mobxjs/mobx-state-tree/raw/master/docs/tserror.png)
 
-_Designtime type error_
+设计时类型错误：
+
 
 Because state trees are living, mutable models, actions are straight-forward to write; just modify local instance properties where appropriate. See `toggleTodo()` above or the examples below. It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
 
@@ -146,13 +147,14 @@ Simply subscribing to the patch stream of a tree is another way to sync diffs wi
 
 ![patches](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/patches.png)
 
-Since MST uses MobX behind the scenes, it integrates seamlessly with [mobx](https://mobx.js.org) and [mobx-react](https://github.com/mobxjs/mobx-react).
-But even cooler: because it supports snapshots, middleware and replayable actions out of the box, it is even possible to replace a Redux store and reducer with a MobX state tree.
+MST 无缝结合了 [mobx](https://mobx.js.org) 和 [mobx-react](https://github.com/mobxjs/mobx-react)。更酷的是，因为它默认支持快照、中间件以及可复制的 action，所以它甚至可以替代 Redux 和 reducer。
+
 This makes it even possible to connect the Redux devtools to MST. See the [Redux / MST TodoMVC example](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/redux-todomvc/src/index.js#L6).
 
-![devtools](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/reduxdevtools.png)
+![开发者工具](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/reduxdevtools.png)
 
-Finally, MST has built-in support for references, identifiers, dependency injection, change recording and circular type definitions (even across files).
+MST 内置了引用、标识符、依赖注入、变更记录以及类型循环定义（甚至是跨文件）。
+
 Even fancier: it analyses liveliness of objects, failing early when you try to access accidentally cached information! (More on that later)
 
 A pretty unique feature of MST is that it offers liveliness guarantees; it will throw when reading or writing from objects that are no longer part of a state tree. This protects you against accidental stale reads of objects still referred by, for example, a closure.
