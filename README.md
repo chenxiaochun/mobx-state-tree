@@ -175,8 +175,7 @@ store.removeTodo(0)
 // 使用过期对象，在一秒钟后会抛出异常
 ```
 
-
-Despite all that, you will see that the [API](API.md) is pretty straightforward!
+可查看简洁明了的 [API](API.md) 文档。
 
 ---
 
@@ -199,12 +198,12 @@ With MobX state tree, you build, as the name suggests, trees of models.
 
 ### 树，类型和数据
 
-树中的每一个节点都被两个东西所定义：它的类型和它的数据。一个最简单的树可能是这样的：
+树中的每一个节点都被两个东西所定义：它的类型（组成结构）和它的数据（目前的状态）。一个最简单的树可能是这样的：
 
 ```javascript
 import {types} from "mobx-state-tree"
 
-// 声明节点的数据类型
+// 定义节点的组成结构
 const Todo = types.model({
     title: types.string
 })
@@ -215,11 +214,11 @@ const coffeeTodo = Todo.create({
 })
 ```
 
-`types.model`通常用来定义对象的结构。其它内置的 type，比如：array、map和基本类型等，可以查看[types 综述](#types-overview)。
+`types.model`通常用来定义对象的结构。其它内置的 type，还有 array、map和原始类型等，可以查看[types 综述](#types-overview)。
 
 ### 创建 model
 
-在 MST 中最重要的类型就是`types.model`，用来定义一个对象是如何构成的。例如：
+在 MST 中最重要的类型就是`types.model`，用来描述一个对象的组成结构。例如：
 
 ```javascript
 const TodoStore = types
@@ -250,11 +249,11 @@ const TodoStore = types
         };
     })
 ```
-创建一个 model 时，传给 model 方法的第一个参数表示它的名字（标有 1 的代码行），用于 debug 代码时使用；第二个对象参数定义了它所有的属性。
+创建一个 model 时，建议给 model 方法定义一个名称以用于 debug 代码时使用；第二个对象参数定义了它所有的属性。（标有 1 的代码行）
 
 属性参数是一个 key-value 的集合，key 表示属性名称，value 表示它的数据类型。下面的类型都是可接受的：
 
-1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的预定义类型（标有 4 的代码行）
+1. 可以是一个简单的原始类型，例如：`types.boolean`（标有 2 的代码行）；可以是一个复杂的事先定义好的类型（标有 4 的代码行）
 2. 可以直接使用一个原始类型值作为默认值（标有 3 的代码行），`endpoint: "http://localhost"`等同于`endpoint: types.optional(types.string, "http://localhost")`。MST 可以通过默认值推测出其数据类型是什么，拥有默认值的属性在创建快照时可以进行省略。
 3. 可以是一个[计算属性](https://mobx.js.org/refguide/computed-decorator.html)（标有 6 的代码行）。MobX 会记忆和追踪计算属性。计算属性将不会被存储在快照里，也不会触发 patch 事件。也可能会给计算属性提供一个 setter 方法，并且 setter 方法只能在 action 里被调用。
 4. 可以是一个 view 函数（标有 7 的代码行）。View 函数跟计算属性不同，它可以获得任意数量的参数。虽然它不会被记忆，但是它的值可以被 MobX 追踪。View 函数不允许修改 model，通常只是用它来检索 model 的信息。
@@ -296,15 +295,15 @@ const TodoStore = types
     })
 ```
 
-可以很完美的以任意顺序链式调用多个`views`和`props`。这种方式可以用来非常好的组织 types，以及混合一些实用的函数。每次的链式调用都会创建一个可以被它自己存储以及作为其它 types 的一部分重复使用的、新的、不可变的 type。
+可以很完美的以任意顺序链式调用多个`views`和`props`。这种方式可以用来非常好的组织 types，以及混入一些实用的函数。每次的链式调用都会创建一个可以被它自己存储以及作为其它 types 的一部分重复使用的、新的、不可变的 type。
 
-可以在 action 对象内定义生命周期的勾子，这些拥有预定义名称的 action 将会在特定时刻被执行。可查看[生命周期勾子](#lifecycle-hooks-for-typesmodel)。
+可以在 action 对象内定义生命周期的勾子，这些拥有预先定义的名称的 action 将会在特定时刻被执行。可查看[生命周期勾子](#lifecycle-hooks-for-typesmodel)。
 
 ### 树结构语义详解
 
-MST 树拥有非常特别的语义，这些语义的目的就是为了约束你。它带来的好处就是提供了各种开箱即用的特性，比如：快照、可复用性等。如果这些约束并不适用于你的应用，you are probably better of using plain mobx with your own model classes. Which is perfectly fine as well.
+MST 树拥有非常特别的语义，这些语义的目的就是为了在你使用 MST 时进行约束。它带来的好处就是提供了各种各样的通用特性，比如：快照、可玩性等。如果这些约束不适用于你的应用，你最好使用普通的 mobx 去结合你的 model 类，这样对于你可能更好一些。
 
-1. 在 MST 中每个对象被认为是一个 “node”，每一个原始类型被认为是一个“leaf”。
+1. 在 MST 中每个对象被认为是一个“node”。每一个原始值被认为是一片“叶子”。
 2. MST 仅仅拥有三种节点类型：model、array 和 map。
 3. Every _node_ tree in a MST tree is a tree in itself. Any operation that can be invoked on the complete tree can also be applied to a sub tree.
 4. 一个节点只能在一个树中存在一次，这样可确保它是唯一可辨识的。
