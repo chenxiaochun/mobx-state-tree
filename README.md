@@ -149,13 +149,13 @@ Simply subscribing to the patch stream of a tree is another way to sync diffs wi
 
 MST 无缝结合了 [mobx](https://mobx.js.org) 和 [mobx-react](https://github.com/mobxjs/mobx-react)。更酷的是，因为它默认支持快照、中间件以及可复制的 action，所以它甚至可以替代 Redux 和 reducer。
 
-This makes it even possible to connect the Redux devtools to MST. See the [Redux / MST TodoMVC example](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/redux-todomvc/src/index.js#L6).
+这甚至可以将 Redux 开发者工具和 MST 联接起来。可查看一个[使用 Redux 与 MST 实现的待办事项示例]。
 
 ![开发者工具](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/reduxdevtools.png)
 
 MST 内置了引用、标识符、依赖注入、变更记录以及类型循环定义（甚至是跨文件）。
 
-Even fancier: it analyses liveliness of objects, failing early when you try to access accidentally cached information! (More on that later)
+Even fancier: it analyses liveliness of objects, failing early when you try to access accidentally cached information! (More on that later)。
 
 A pretty unique feature of MST is that it offers liveliness guarantees; it will throw when reading or writing from objects that are no longer part of a state tree. This protects you against accidental stale reads of objects still referred by, for example, a closure.
 
@@ -172,7 +172,7 @@ function logTodo(todo) {
 
 logTodo(store.todos[0])
 store.removeTodo(0)
-// throws exception in one second for using an stale object!
+// 使用过期对象，在一秒钟后会抛出异常
 ```
 
 
