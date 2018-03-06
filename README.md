@@ -88,7 +88,7 @@ This makes it possible to solve many common problems out of the box.
 
 MST (mobx-state-tree) 的核心思想就是一个动态树。它由严格受保护的易变对象以及运行时类型信息浓缩而成。换句话说，每个树都是由一个结构（类型信息）和一个状态（数据）组成。
 
-通过这个树，不变的结构被共享，自动生成快照。
+通过这个树，共享固定的对象结构，并自动生成快照。
 
 ```javascript
 import { types, onSnapshot } from "mobx-state-tree"
@@ -135,8 +135,7 @@ store.todos[0].toggle()
 
 设计时类型错误：
 
-
-Because state trees are living, mutable models, actions are straight-forward to write; just modify local instance properties where appropriate. See `toggleTodo()` above or the examples below. It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
+因为状态树是一个动态可变的模型，action 可对它直接进行改写，就像修改本地实例属性一样。可参见上面的示例中的`toggleTodo()`方法。It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
 
 Although mutable sounds scary to some, fear not: actions have many interesting properties.
 By default trees can only be modified by using an action that belongs to the same subtree.
