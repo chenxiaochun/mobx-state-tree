@@ -135,7 +135,7 @@ store.todos[0].toggle()
 
 设计时类型错误：
 
-因为状态树是一个动态可变的模型，action 可对它直接进行改写，就像修改本地实例属性一样。可参见上面的示例中的`toggleTodo()`方法。It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
+因为状态树是一个动态可变的模型，action 可对它直接进行改写，就像修改本地实例属性一样。可参见上面示例中的`toggleTodo()`方法。It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
 
 Although mutable sounds scary to some, fear not: actions have many interesting properties.
 By default trees can only be modified by using an action that belongs to the same subtree.
