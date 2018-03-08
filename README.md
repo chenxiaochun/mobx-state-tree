@@ -121,7 +121,7 @@ store.todos[0].toggle()
 // prints: `{ todos: [{ title: "Get coffee", done: true }]}`
 ```
 
-通过使用这些可用的类型信息，快照可以被转换为一个动态树，反之亦然，也是零操作即可转换回去。因此，MST 默认支持[时间旅行](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/time.js)和类似于热替换的功能，可参考[示例](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/boxes/src/stores/domain-state.js#L94)
+通过使用这些可用的类型信息，快照可以被转换为一个动态树，反之亦然，也是零操作即可转换回去。因此，MST 默认就能支持[时间旅行](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/time.js)和类似于热替换的功能，可参考[示例](https://github.com/mobxjs/mobx-state-tree/blob/4c2b19ec4a6a8d74064e4b8a87c0f8b46e97e621/examples/boxes/src/stores/domain-state.js#L94)
 
 之所以用这样的方式去设计类型信息，就是为了在设计时以及运行时都可以检查类型的正确性（在 TypeScript 中类型检查都是片刻就可以完成的）。
 
@@ -137,11 +137,11 @@ store.todos[0].toggle()
 
 因为状态树是一个动态可变的模型，action 可对它直接进行改写，就像修改本地实例属性一样。可参见上面示例中的`toggleTodo()`方法。It is not necessary to produce a new state tree yourself, MST's snapshot functionality will derive one for you automatically.
 
-Although mutable sounds scary to some, fear not: actions have many interesting properties.
-By default trees can only be modified by using an action that belongs to the same subtree.
-Furthermore, actions are replayable and can be used to distribute changes ([example](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/socket.js)).
+易变的特性听起来好像有些可怕，但是先不要急着害怕，因为 action 给我们提供了很多有趣的特性：
+1. 默认情况下，当前树只能被隶属于相同子树的 action 所修改。
+2. Action 可以被复制，可以用来分发变化（[example](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/socket.js)）。
+3. 变化可以在一个相当细的粒度上被检测到，默认支持 [JSON patch](http://jsonpatch.com/)。
 
-Moreover, because changes can be detected on a fine grained level, JSON patches are supported out of the box.
 Simply subscribing to the patch stream of a tree is another way to sync diffs with, for example, back-end servers or other clients ([example](https://github.com/mobxjs/mobx-state-tree/blob/master/packages/mst-example-boxes/src/stores/socket.js)).
 
 ![patches](https://raw.githubusercontent.com/mobxjs/mobx-state-tree/master/docs/patches.png)
