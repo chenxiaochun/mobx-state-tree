@@ -313,10 +313,10 @@ MST 树拥有非常特别的语义，这些语义的目的就是为了在你使�
 8. The only free-form type in MST is frozen; with the requirement that frozen values are immutable and serializable so that the MST semantics can still be upheld.
 9. At any point in the tree it is possible to assign a snapshot to the tree instead of a concrete instance of the expected type. In that case an instance of the correct type, based on the snapshot, will be automatically created for you.
 10. Nodes in the MST tree will be reconciled (the exact same instance will be reused) when updating the tree by any means, based on their _identifier_ property. If there is no identifier property, instances won't be reconciled.
-11. If a node in the tree is replaced by another node, the original node will die and become unusable. This makes sure you are not accidentally holding on to stale objects anywhere in your application.
+11. 如果树中的一个节点被另一个节点替代了，那么源节点就会死去变成不可用的状态。这可以确保你不会在应用程序中意外地操作过期的对象。
 12. 如果你想基于树中的已有节点创建一个新的节点，你可以`detach`那个节点或者`clone`它。
 
-### Composing trees
+### 树的构成
 
 In MST every node in the tree is a tree in itself.
 Trees can be composed by composing their types:
