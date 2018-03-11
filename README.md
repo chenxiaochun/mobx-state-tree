@@ -333,7 +333,7 @@ const storeInstance = TodoStore.create({
 })
 ```
 
-The _snapshot_ passed to the `create` method of a type will recursively be turned in MST nodes. So you can safely call:
+传递给`create`方法的_快照_将会被递归地转换成 MST 节点。因此，你可以安全地这样调用：
 
 ```javascript
 storeInstance.todos[0].setTitle("Chocolate instead plz")
@@ -361,30 +361,30 @@ const Todo = types.model({
     })
 ```
 
-如果没有本地数据和私有方法被外部调用的话，也可以简写成：
+如果没有本地数据和私有方法需要调用的话，也可以简写成：
 
 ```javascript
 const Todo = types.model({
         title: types.string
     })
-    .actions(self => ({ // 注意 `({`，我们仅返回了一个对象字面量
+    .actions(self => ({ // 注意 `({`，这样返回了一个对象字面量
         setTitle(newTitle) {
             self.title = newTitle
         }
     }))
 ```
 
-Action 是可复制的，因此它也有若干约束需要你知道：
+Action 是可被复制的，因此有若干使用约束需要你知道：
 
 - 不使用 action 修改节点将会抛出异常
-- 建议 action 的参数是可序列化的。例如，其它节点的相对路径就会被自动序列化
-- 不要在 action 内部使用`this`，应该用`self`来代替它。这使得可以很安全的在没有绑定`this`上下文的函数以及箭头函数中去你传递它。
+- 建议 action 的参数都是可序列化的。有些参数是可以被自动序列化，例如，相对于其它节点的相对路径
+- 不要在 action 内部使用`this`，应该用`self`来代替它。这使得可以很安全的在没有绑定`this`上下文的函数以及箭头函数中去传递 action
 
 一些有用的方法：
 
--   [`onAction`](API.md#onaction) listens to any action that is invoked on the model or any of its descendants.
--   [`addMiddleware`](API.md#addmiddleware) listens to any action that is invoked on the model or any of its descendants.
--   [`applyAction`](API.md#applyaction) invokes an action on the model according to the given action description
+-   [`onAction`](API.md#onaction)列出在 model 中，以及它的后代节点中已经引用的任何 action
+-   [`addMiddleware`](API.md#addmiddleware) listens to any action that is invoked on the model or any of its descendants.（此处的官方说明和[API](API.md#addmiddleware)的说明有出入）
+-   [`applyAction`](API.md#applyaction)在 model 中，根据给定的 action 描述去引入一个 action
 
 #### 异步的 action
 
