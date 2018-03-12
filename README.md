@@ -429,8 +429,7 @@ This may be desired if the default protection of `mobx-state-tree` doesn't fit y
 
 任何从你的数据状态中的派生都可以被称之为“view”或者“derivation”（推导）。想了解更多背景信息可查看[Mobx 概念与原则](https://mobx.js.org/intro/concepts.html)
 
-View 有两种方式：有参数和无参数。后者被称为计算值，基于的是 MobX 的[计算](https://mobx.js.org/refguide/computed-decorator.html)概念。两者最主要的区别就是计算属性有一个明确的缓存点，
-The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
+View 有两种形式：有参数和无参数。后者一般被称为计算值，基于的是 MobX 的[计算](https://mobx.js.org/refguide/computed-decorator.html)概念。两者最主要的区别就是计算属性有一个明确的缓存点，但是它们更深层的工作方式是相同的 and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. 计算值是基于 _getter_ 方法定义的。
 
 Example:
 
