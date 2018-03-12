@@ -314,7 +314,7 @@ MST 树拥有非常特别的语义，这些语义的目的就是为了在你使�
 9. At any point in the tree it is possible to assign a snapshot to the tree instead of a concrete instance of the expected type. In that case an instance of the correct type, based on the snapshot, will be automatically created for you.
 10. Nodes in the MST tree will be reconciled (the exact same instance will be reused) when updating the tree by any means, based on their _identifier_ property. If there is no identifier property, instances won't be reconciled.
 11. 如果树中的一个节点被另一个节点替代了，那么源节点就会死去变成不可用的状态。这可以确保你不会在应用程序中意外地操作过期的对象。
-12. 如果你想基于树中的已有节点创建一个新的节点，你可以`detach`那个节点或者`clone`它。
+12. 如果你想基于树中的已有节点创建一个新的节点，你可以`detach`或者`clone`那个节点。
 
 ### 树的构成
 
@@ -344,7 +344,7 @@ This makes it possible to get a patch stream of a certain subtree, or to apply m
 
 ### Actions
 
-默认情况下，只有当前或者更高层级的 action 才能修改节点数据。需要给 action 传递一个初始化回调函数，它返回的是一个对象。初始化函数会在每个实例上都执行一次，因此，`self`指向的就是当前实例。在 action 的回调函数中通常用来存储某些数据，这个也被称为实例的 volatile 状态，又或者是用来创建一个只能在 action 内部被调用的私有方法。
+默认情况下，只有其中的一个 action 或者更高层级的 action 才能修改节点数据。可以通过传递给`actions`的初始化函数中返回一个对象来定义 action。每次实例化时，初始化函数都会被执行，因此，`self`一直指向的都是当前实例。同时，可以在函数中创建用来储存数据的闭包，这种也被称为实例的 _volatile_ 状态；或者是创建只能被 action 调用的私有方法。
 
 ```javascript
 const Todo = types.model({
@@ -427,9 +427,10 @@ This may be desired if the default protection of `mobx-state-tree` doesn't fit y
 
 ### Views
 
-任何从你的数据状态中的派生都可以被称之为“view”或者“derivation”（推导）。想了解一些背景信息可查看[Mobx 概念与原则](https://mobx.js.org/intro/concepts.html)
+任何从你的数据状态中的派生都可以被称之为“view”或者“derivation”（推导）。想了解更多背景信息可查看[Mobx 概念与原则](https://mobx.js.org/intro/concepts.html)
 
-View 有两种使用方式：有参数和无参数。根据 mobx 中的[计算属性](https://mobx.js.org/refguide/computed-decorator.html)概念说明，后者也会被称之为计算值。The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
+View 有两种方式：有参数和无参数。后者被称为计算值，基于的是 MobX 的[计算](https://mobx.js.org/refguide/computed-decorator.html)概念。两者最主要的区别就是计算属性有一个明确的缓存点，
+The main difference between the two is that computed properties create an explicit caching point, but further they work the same and any other computed value or Mobx based reaction like [`@observer`](https://mobx.js.org/refguide/observer-component.html) components can react to them. Computed values are defined using _getter_ functions.
 
 Example:
 
