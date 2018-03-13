@@ -415,9 +415,9 @@ someModel.actions(self => {
 })
 ```
 
-#### Action 监听器和中间件
+#### Action 监听器与中间件的对比
 
-Action 监听器与中间件的区别是：中间件可以主动拦截那些引用了它的 action，modify arguments, return types etc. Action 监听器不能主动拦截，它只能被动的接受通知。Action listeners receive the action arguments in a serializable format, while middleware receives the raw arguments. (`onAction` is actually just a built-in middleware)
+Action 监听器与中间件的区别是：中间件可以主动拦截那些调用了它的 action，modify arguments, return types etc. Action 监听器不能主动拦截，它只能被动的接受通知。Action listeners receive the action arguments in a serializable format, while middleware receives the raw arguments. (`onAction` is actually just a built-in middleware)
 
 对于创建中间件的更多内容可查看[中间件](docs/middleware.md)
 
@@ -460,12 +460,12 @@ autorun(() => {
 })
 ```
 
-If you want to share volatile state between views and actions, use `.extend` instead of `.views` + `.actions`, see the [volatile state](#volatile-state) section.
+如果你想在 view 和 action 之间共享 volatile 数据，就得使用`.extend`代替`.views`和`.actions`了，可查看[volatile 数据](#volatile-state)。
 
 ### 快照
 
-Snapshots are the immutable serialization, in plain objects, of a tree at a specific point in time.
-Snapshots can be inspected through `getSnapshot(node)`.
+快照就是一个树中特定时间点的、固定的、序列化的纯对象。可以通过使用`getSnapshot(node)`来对它进行检查。
+
 Snapshots don't contain any type information and are stripped from all actions etc, so they are perfectly suitable for transportation.
 Requesting a snapshot is cheap, as MST always maintains a snapshot of each node in the background, and uses structural sharing
 
@@ -476,18 +476,18 @@ console.dir(getSnapshot(coffeeTodo))
 // prints `{ title: "Tea instead plz" }`
 ```
 
-Some interesting properties of snapshots:
+关于快照的一些有趣的特性：
 
--   Snapshots are immutable
--   Snapshots can be transported
--   Snapshots can be used to update models or restore them to a particular state
--   Snapshots are automatically converted to models when needed. So the two following statements are equivalent: `store.todos.push(Todo.create({ title: "test" }))` and `store.todos.push({ title: "test" })`.
+- 快照是不可变的
+- 快照可以用来传输
+- 快照可以用来更新 model 或者是恢复它们到某一状态
+- 快照可以在需要的时候自动转换成 model。因此下面的两种表述是等价的：`store.todos.push(Todo.create({ title: "test" }))`和`store.todos.push({ title: "test" })`。
 
-Useful methods:
+一些有用的方法：
 
--   `getSnapshot(model)`: returns a snapshot representing the current state of the model
--   `onSnapshot(model, callback)`: creates a listener that fires whenever a new snapshot is available (but only one per MobX transaction).
--   `applySnapshot(model, snapshot)`: updates the state of the model and all its descendants to the state represented by the snapshot
+- `getSnapshot(model)`：返回一个表示当前 model 状态的快照
+- `onSnapshot(model, callback)`：无论何时，当一个新快照可用时，就创建一个监听器(but only one per MobX transaction)
+- `applySnapshot(model, snapshot)`：使用快照更新 model 以及它所有后代的状态
 
 ## Patches
 
