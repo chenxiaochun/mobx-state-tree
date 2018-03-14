@@ -466,8 +466,7 @@ autorun(() => {
 
 快照就是一个树中特定时间点的、固定的、序列化的纯对象。可以通过使用`getSnapshot(node)`来对它进行检查。
 
-Snapshots don't contain any type information and are stripped from all actions etc, so they are perfectly suitable for transportation.
-Requesting a snapshot is cheap, as MST always maintains a snapshot of each node in the background, and uses structural sharing
+快照不包含任何类型信息并且从所有 action 中剥离了出来，因此，它非常适合用于传输。请求一个快照是非常廉价的，MST 在后台维护着每一个在结构上都是共享的节点快照。
 
 ```javascript
 coffeeTodo.setTitle("Tea instead plz")
@@ -515,7 +514,7 @@ Useful methods:
 
 ### 引用和标识符
 
-在 MST 中，引用和标识符是一个一流的概念。
+在 MST 中，引用和标识符是一个一级的概念。
 
 This makes it possible to declare references, and keep the data normalized in the background, while you interact with it in a denormalized manner.
 
