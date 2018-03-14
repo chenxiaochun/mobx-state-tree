@@ -156,7 +156,7 @@ MST 内置了引用、标识符、依赖注入、变更记录以及类型循环�
 
 Even fancier: it analyses liveliness of objects, failing early when you try to access accidentally cached information! (More on that later)。
 
-MST 中的一个独特特性就是提供了很灵活的保证，当你试图读写不属于状态树的一部分的对象时，它就会抛出异常。这可以让你免受那些仍然被引用的对象的意外读取，例如：一个闭包。
+MST 中的一个独特特性就是提供了很灵活的担保，当你试图从对象中读写不属于状态树的部分时，它就会抛出异常。这可以保护你免受那些仍然被引用的对象的意外读取，例如：闭包。
 
 ```javascript
 const oldTodo = store.todos[0]
@@ -180,7 +180,7 @@ store.removeTodo(0)
 
 Another way to look at mobx-state-tree is to consider it, as argued by Daniel Earwicker, to be ["React, but for data"](http://danielearwicker.github.io/json_mobx_Like_React_but_for_Data_Part_2_.html).
 
-类似于 React，MST 是由被称为 model 的组件所构成，它们用来捕捉小块的数据。它们通过 props（快照）被实例化以后，用来管理和保护它们内部的数据（使用 action）。当应用快照的时候，树节点就会尽量保持一致。这就类似于上下文环境机制，可将传递信息给深层的子节点。
+类似于 React，MST 是由被称为 model 的组件所构成，它们用来捕捉小块的数据。它们通过 props（快照）被实例化以后，用来管理和保护它们内部的数据（使用 action）。当应用快照的时候，树节点就会尽量保持一致。这就类似于上下文环境机制，可将信息传递给深层的子节点。
 
 An introduction to the philosophy can be watched [here](https://youtu.be/ta8QKmNRXZM?t=21m52s). [Slides](https://immer-mutable-state.surge.sh/). Or, as [markdown](https://github.com/mweststrate/reactive2016-slides/blob/master/slides.md) to read it quickly.
 
