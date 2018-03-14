@@ -388,8 +388,9 @@ Action 是可被复制的，因此有若干使用约束需要你知道：
 
 #### 异步的 action
 
-Asynchronous actions have first class support in MST and are described in more detail [here](docs/async-actions.md#asynchronous-actions-and-middleware).
-Asynchronous actions are written by using generators and always return a promise. For a real working example see the [bookshop sources](https://github.com/mobxjs/mobx-state-tree/blob/adba1943af263898678fe148a80d3d2b9f8dbe63/examples/bookshop/src/stores/BookStore.js#L25). A quick example to get the gist:
+在 MST 中，异步 action 是作为第一级支持的，详情信息描述可查看[这里](docs/async-actions.md#asynchronous-actions-and-middleware)。
+
+异步 action 是用 generator 实现的，并且总是返回一个 promise。可参考实例：[bookshop sources](https://github.com/mobxjs/mobx-state-tree/blob/adba1943af263898678fe148a80d3d2b9f8dbe63/examples/bookshop/src/stores/BookStore.js#L25)。下面是实例的部分主要代码：
 
 ```javascript
 import { types, flow } from "mobx-state-tree"
