@@ -53,7 +53,7 @@ Introduction blog post [The curious case of MobX state tree](https://medium.com/
 * [提示](#tips)
 * [常见问题](#FAQ)
 * [Api 完整文档](API.md)
-* [Built-in / example middlewares](packages/mst-middlewares/README.md)
+* [内置的中间件示例](packages/mst-middlewares/README.md)
 * [Changelog](changelog.md)
 
 # 安装
@@ -491,15 +491,17 @@ console.dir(getSnapshot(coffeeTodo))
 
 ## Patches
 
-Modifying a model does not only result in a new snapshot, but also in a stream of [JSON-patches](http://jsonpatch.com/) describing which modifications were made.
-Patches have the following signature:
+对一个 model 进行修改时，不仅会产生一个新的快照，而且会生一个描述修改的 [JSON-patches](http://jsonpatch.com/) 流。
 
+Patche 拥有以下特征：
+
+```
     export interface IJsonPatch {
         op: "replace" | "add" | "remove"
         path: string
         value?: any
     }
-
+```
 -   Patches 是根据 JSON-Patch, RFC 6902 构造的
 -   Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
 -   Patch listeners can be used to achieve deep observing
