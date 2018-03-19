@@ -505,14 +505,14 @@ Patche 拥有以下特征：
 - Patches 是根据 JSON-Patch, RFC 6902 构造的
 - Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
 - Patch 监听器通常用来完成深层次的观察
-- 一个 patch 的`path`属性包含着事件的路径，相对于事件监听器被加载的位置
+- 一个 patch 的`path`属性包含着相对于事件监听器被加载的位置的路径
 - 一个单一的 mutation 可能会产生多个 patch，例如切分数组的时候
 - Patches can be reverse applied, which enables many powerful patterns like undo / redo
 
 一些有用的方法：
 - `onPatch(model, listener)`给当前 model 添加一个 patch 监听器，当前 model 或者它的任何后代产生突变时都会被调用
 - `applyPatch(model, patch)`给当前 model 应用一个 patch（或者是一个 patch 数组）
--   `revertPatch(model, patch)` reverse applies a patch (or array of patches) to the provided model. This replays the inverse of a set of patches to a model, which can be used to bring it back to its original state
+- `revertPatch(model, patch)` reverse applies a patch (or array of patches) to the provided model. This replays the inverse of a set of patches to a model, which can be used to bring it back to its original state
 
 ### 引用和标识符
 
@@ -562,12 +562,12 @@ const Car = types.model("Car", {
 })
 ```
 
-#### References
+#### 引用
 
 References are defined by mentioning the type they should resolve to. The targeted type should have exactly one attribute of the type `identifier()`.
 References are looked up through the entire tree, but per type. So identifiers need to be unique in the entire tree.
 
-#### Customizable references
+#### 自定义的引用
 
 The default implementation uses the `identifier` cache to resolve references (See [`resolveIdentifier`](API.md#resolveIdentifier)).
 However, it is also possible to override the resolve logic, and provide your own custom resolve logic.
@@ -764,7 +764,7 @@ const Todo =  types.model({})
 4. Changes in volatile props won't show up in the patch or snapshot stream
 4. It is currently not supported to define getters / setters in the object returned by `volatile`
 
-## Dependency injection
+## 依赖注入
 
 When creating a new state tree it is possible to pass in environment specific data by passing an object as the second argument to a `.create` call.
 This object should be (shallowly) immutable and can be accessed by any model in the tree by calling `getEnv(self)`.
