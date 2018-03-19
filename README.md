@@ -502,17 +502,16 @@ Patche 拥有以下特征：
         value?: any
     }
 ```
--   Patches 是根据 JSON-Patch, RFC 6902 构造的
--   Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
--   Patch listeners can be used to achieve deep observing
--   The `path` attribute of a patch contains the path of the event, relative to the place where the event listener is attached
--   A single mutation can result in multiple patches, for example when splicing an array
--   Patches can be reverse applied, which enables many powerful patterns like undo / redo
+- Patches 是根据 JSON-Patch, RFC 6902 构造的
+- Patches are emitted immediately when a mutation is made, and don't respect transaction boundaries (like snapshots)
+- Patch 监听器通常用来完成深层次的观察
+- 一个 patch 的`path`属性包含着事件的路径，相对于事件监听器被加载的位置
+- 一个单一的 mutation 可能会产生多个 patch，例如切分数组的时候
+- Patches can be reverse applied, which enables many powerful patterns like undo / redo
 
-Useful methods:
-
--   `onPatch(model, listener)` attaches a patch listener to the provided model, which will be invoked whenever the model or any of its descendants is mutated
--   `applyPatch(model, patch)` applies a patch (or array of patches) to the provided model
+一些有用的方法：
+- `onPatch(model, listener)`给当前 model 添加一个 patch 监听器，当前 model 或者它的任何后代产生突变时都会被调用
+- `applyPatch(model, patch)`给当前 model 应用一个 patch（或者是一个 patch 数组）
 -   `revertPatch(model, patch)` reverse applies a patch (or array of patches) to the provided model. This replays the inverse of a set of patches to a model, which can be used to bring it back to its original state
 
 ### 引用和标识符
