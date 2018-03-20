@@ -6,7 +6,7 @@
 开始此教程之前，我假设你已经对 React 有了基础的了解。否则，建议首先去阅读一下这份 [React 教程](https://facebook.github.io/react/tutorial/tutorial.html)。
 
 ### 我需要提前学习 MobX 吗?
-MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
+MST 深度依赖于 MobX。因此，如果你使用过 MobX 的话，将对你处理一些复杂的情况和怎样把数据与 React 组件连接起来非常有帮助。但是，如果你没有使用过 MobX 也没关系，因为使用 MST 不需要任何 MobX API 方面的知识。
 
 ## 如何跟随这门教程
 你可以使用 [codesandbox](https://codesandbox.io/) 在浏览器中直接写代码，也可以使用你偏爱的某种编辑器（例如：VSCode）都是可以的。
@@ -223,7 +223,7 @@ console.log(getSnapshot(store))
 */
 ```
 
-Note: The `.toJSON()` you have used before in the tutorial is just a shortcut to `getSnapshot`!
+注意：你在以前教程中用过的`toJSON()`方法就是`getSnapshot`的快捷方式。
 
 Because the nature of state is mutable, a snapshot will be emitted whenever the state is mutated! To listen to those new snapshot, you can use `onSnapshot(store, snapshot => console.log(snapshot))` to log them as they are emitted!
 
