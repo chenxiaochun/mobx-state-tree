@@ -512,7 +512,7 @@ Patche 拥有以下特征：
 一些有用的方法：
 - `onPatch(model, listener)`给当前 model 添加一个 patch 监听器，当前 model 或者它的任何后代产生突变时都会被调用
 - `applyPatch(model, patch)`给当前 model 应用一个 patch（或者是一个 patch 数组）
-- `revertPatch(model, patch)` reverse applies a patch (or array of patches) to the provided model. This replays the inverse of a set of patches to a model, which can be used to bring it back to its original state
+- `revertPatch(model, patch)`反向应用一个 patch（或者是一个 patch 数组）到当前提供的 model。这种给 model 反向回放一系列 patch 的方式，通常用来将 model 带回到它的初始的状态
 
 ### 引用和标识符
 
