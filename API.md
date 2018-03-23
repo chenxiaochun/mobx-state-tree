@@ -231,7 +231,7 @@ Returns **any** the original function
 
 ## destroy
 
-Removes a model element from the state tree, and mark it as end-of-life; the element should not be used anymore
+将一个 model 元素从状态树中移除，并且标记为生命已终结，再也不能被使用。
 
 **Parameters**
 
