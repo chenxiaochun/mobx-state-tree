@@ -126,7 +126,7 @@ const Todo = types.model({
 
 ## applyAction
 
-将一个 action 或者一系列 action 到一个单一 MobX 事务上。不会返回任何值。可以通过`onAction`中间件获取一个 action 的详细描述信息。
+将一个 action 或者一系列 action 应用到一个单一 MobX 事务上。不会返回任何值。可以通过`onAction`中间件获取一个 action 的详细描述信息。
 
 **参数**
 
