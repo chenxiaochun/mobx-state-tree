@@ -156,11 +156,11 @@ Can apply a single past, or an array of patches.
 
 ## clone
 
-深拷贝给定的树节点，并作为一个新树返回。快捷方式：`snapshot(x) = getType(x).create(getSnapshot(x))`。
+深拷贝给定的树节点，并返回一个新的树。快捷方式：`snapshot(x) = getType(x).create(getSnapshot(x))`。
 
 _Tip: clone will create a literal copy, including the same identifiers. To modify identifiers etc during cloning, don't use clone but take a snapshot of the tree, modify it, and create new instance_
 
-**Parameters**
+**参数**
 
 -   `source` **T** 
 -   `keepEnvironment` **([boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | any)** indicates whether the clone should inherit the same environment (`true`, the default), or not have an environment (`false`). If an object is passed in as second argument, that will act as the environment for the cloned tree.
