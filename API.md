@@ -195,9 +195,9 @@ Returns **IMiddlewareHandler**
 
 ## decorate
 
-Binds middleware to a specific action
+给指定的 action 绑定中间件
 
-**Parameters**
+**参数**
 
 -   `middleware` **IMiddlewareHandler** 
 -   `fn`  
@@ -231,9 +231,9 @@ Returns **any** the original function
 
 ## detach
 
-Removes a model element from the state tree, and let it live on as a new state tree
+从状态树中移除一个 model 元素，并将其移植到一个新的状态树上。
 
-**Parameters**
+**参数**
 
 -   `target`  
 
