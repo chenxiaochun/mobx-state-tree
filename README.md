@@ -339,8 +339,7 @@ const storeInstance = TodoStore.create({
 storeInstance.todos[0].setTitle("Chocolate instead plz")
 ```
 
-Because any node in a tree is an tree in itself, any built-in method in MST can be invoked on any node in the tree, not just the root.
-This makes it possible to get a patch stream of a certain subtree, or to apply middleware to a certain subtree only.
+因为树中的任何节点就是它自己本身，所以 MST 中内置的任何方法都可以在任何节点上被调用，而不仅仅是在根节点上。这使得获取某一子树的 patch 流或者是仅仅在某一子树上应用一个中间件成为可能。
 
 ### Actions
 
