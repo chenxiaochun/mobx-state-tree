@@ -194,7 +194,7 @@ mobx-state-tree "immutable trees" and "graph model" features talk, ["Next Genera
 
 # 概念
 
-MobX 状态树，顾名思义，就是用来构建树的状态。
+MobX 状态树，顾名思义，就是用来构建状态的树。
 
 ### 树，类型和数据
 
@@ -305,7 +305,7 @@ MST 树拥有非常特别的语义，这些语义的目的就是为了在你使�
 
 1. 在 MST 中每个对象被认为是一个“node”。每一个原始值被认为是一片“叶子”。
 2. MST 仅仅拥有三种节点类型：model、array 和 map。
-3. Every _node_ tree in a MST tree is a tree in itself. Any operation that can be invoked on the complete tree can also be applied to a sub tree.
+3. MST 中的每一个 _节点_ 就是它本身。任何可以应用以完整树上的操作都可以应用到子树上。
 4. 一个节点只能在一个树中存在一次，这样可确保它是唯一可辨识的。
 5. 可以在相同的树中使用 reference 去引用另一个对象。
 6. 对存在于一个应用中的 MST 树没有数量限制，但是一个节点仅仅只能存在于一个树中。
