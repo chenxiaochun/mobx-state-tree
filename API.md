@@ -242,19 +242,19 @@ Returns **any** the original function
 escape slashes and backslashes
 <http://tools.ietf.org/html/rfc6901>
 
-**Parameters**
+**参数**
 
 -   `str`  
 
 ## flow
 
-See [asynchronous actions](https://github.com/mobxjs/mobx-state-tree/blob/master/docs/async-actions.md).
+可查看 [异步 action](https://github.com/mobxjs/mobx-state-tree/blob/master/docs/async-actions.md)。
 
-**Parameters**
+**参数**
 
 -   `asyncAction`  
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+返回 **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ## getChildType
 
